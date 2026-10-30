@@ -22,7 +22,7 @@
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;overflow-x:hidden;overflow-x:clip}
-body{font-synthesis:none;margin:0;background:var(--paper) var(--dots);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.55;overflow-x:hidden}
+body{font-synthesis:none;margin:0;background:var(--paper) var(--dots);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.55;overflow-x:clip}
 img{max-width:100%;display:block}
 a{color:inherit}
 h1,h2,h3{font-family:var(--display);font-weight:900;line-height:1;letter-spacing:-.02em;margin:0;text-wrap:balance}
@@ -107,10 +107,10 @@ html.js .rv.in{opacity:1;transform:rotate(var(--r,0deg));transition:opacity .45s
 .msgline{display:flex;flex-direction:column;gap:10px;align-items:flex-end}
 .msg{background:var(--peach);color:var(--ink);border:3px solid var(--ink);border-radius:22px 22px 6px 22px;padding:10px 16px;font-weight:700;max-width:90%}
 .msg small{display:block;text-align:right;font-size:12px;opacity:.6}
-.big-quiet{font:900 clamp(34px,5vw,58px)/1 var(--display);text-transform:uppercase;color:var(--ink);-webkit-text-stroke:0;transform:rotate(-4deg);margin:auto 0}
+.big-quiet{font:900 clamp(24px,2.6vw,34px)/1 var(--display);text-transform:uppercase;color:var(--ink);-webkit-text-stroke:0;transform:rotate(-4deg);margin:auto 0}
 .s3{background:var(--ht),var(--card);justify-content:center;align-items:center;text-align:center}
 .s4{background:var(--orange)}
-.s4 .big-quiet{color:#fff;-webkit-text-stroke:2.5px var(--ink);paint-order:stroke fill}
+.s2 .big-quiet{font-size:clamp(34px,5vw,56px)}.s4 .big-quiet{color:#fff;-webkit-text-stroke:2.5px var(--ink);paint-order:stroke fill}
 .zero{font:900 110px/1 var(--display);color:var(--orange);-webkit-text-stroke:3px var(--ink);paint-order:stroke fill}
 .s5{justify-content:space-between}
 
@@ -173,7 +173,7 @@ input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:14px
 input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:28px;height:28px;background:var(--orange);border:3px solid var(--ink);box-shadow:3px 3px 0 var(--ink);cursor:pointer}
 input[type=range]::-moz-range-thumb{width:24px;height:24px;background:var(--orange);border:3px solid var(--ink);border-radius:0;cursor:pointer}
 .result{background:var(--ht),var(--orange)!important;display:flex;flex-direction:column;justify-content:center;gap:14px;overflow:hidden}
-.result .sum{font:900 clamp(38px,6vw,68px)/1 var(--display);color:#fff;-webkit-text-stroke:3px var(--ink);paint-order:stroke fill;font-variant-numeric:tabular-nums;word-break:break-word}
+.result .sum{font:900 clamp(34px,5vw,56px)/1 var(--display);color:#fff;-webkit-text-stroke:3px var(--ink);paint-order:stroke fill;font-variant-numeric:tabular-nums;word-break:break-word}
 .result p{font-weight:700}
 .result small{font-size:13px;font-weight:600;opacity:.85}
 
@@ -311,6 +311,12 @@ h1,h2,h3{font-weight:400;letter-spacing:0}
 .dlg-ex{font-size:18px}
 .ticker div,.zero,.g .n,.stamp,.result .sum,.card .price b,.logo,.mini b,.flow b{font-weight:400}
 
+
+/* animated code background in hero */
+#codebg{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;-webkit-mask-image:linear-gradient(90deg,rgba(0,0,0,.45) 0%,rgba(0,0,0,.18) 35%,rgba(0,0,0,.35) 55%,#000 85%);mask-image:linear-gradient(90deg,rgba(0,0,0,.45) 0%,rgba(0,0,0,.18) 35%,rgba(0,0,0,.35) 55%,#000 85%)}
+@media (max-width:1000px){#codebg{opacity:1;-webkit-mask-image:linear-gradient(180deg,rgba(0,0,0,.55),rgba(0,0,0,.35) 60%,#000);mask-image:linear-gradient(180deg,rgba(0,0,0,.55),rgba(0,0,0,.35) 60%,#000)}}
+.hero .hero-grid{position:relative;z-index:1}
+
 @media (max-width:1000px){
   nav.menu{display:none}
   .hero-grid,.demo,.calc,.about,.final{grid-template-columns:minmax(0,1fr)}
@@ -360,7 +366,7 @@ h1,h2,h3{font-weight:400;letter-spacing:0}
 
 <main id="top">
 <!-- HERO -->
-<section class="hero">
+<section class="hero"><canvas id="codebg" aria-hidden="true"></canvas>
   <div class="wrap hero-grid">
     <div class="hero-copy">
       <span class="cap rv pop">Астана · Казахстан</span>
@@ -630,6 +636,24 @@ h1,h2,h3{font-weight:400;letter-spacing:0}
   document.querySelectorAll('[data-svc]').forEach(function(el){el.addEventListener('click',function(e){if(e.target.closest('a'))return;openSvc(el.dataset.svc)});el.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();openSvc(el.dataset.svc)}})});
   document.getElementById('dlgX').addEventListener('click',closeSvc);document.getElementById('dlgC').addEventListener('click',closeSvc);
   dl.addEventListener('click',function(e){if(e.target===dl)closeSvc()});
+
+  // animated code background
+  (function(){var cv=document.getElementById('codebg');if(!cv||!cv.getContext)return;var cx=cv.getContext('2d'),reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var SRC=['import { booking } from "./api";','const slots = await getFreeSlots(date);','if (!slots.length) return showNextDay();','export async function book(client, time) {','  const order = await pay.create({ amount: 2000 });','  if (order.status === "paid") {','    await calendar.add(client, time);','    notify(owner, order.id);','  }','}','router.post("/webhook", handleMessage);','const reply = faq[question] ?? askAdmin(question);','sheet.append([name, phone, time]);','crm.move(deal, STAGE.PAID);','setInterval(sendReminders, 60_000);','function sendReminders() {','  upcoming(2 * HOUR).forEach(remind);','}','<Calendar onPick={book} theme="comic" />','git push origin main && deploy --prod'];
+    var cols=[],W=0,H=0,dpr=1,fs=15,lh=24,running=true,last=0;
+    function size(){dpr=Math.min(2,devicePixelRatio||1);W=cv.clientWidth;H=cv.clientHeight;cv.width=W*dpr;cv.height=H*dpr;cx.setTransform(dpr,0,0,dpr,0,0);fs=W<640?12:15;lh=fs*1.65;
+      var n=Math.max(1,Math.floor(W/380));cols=[];for(var i=0;i<n;i++){var c={x:20+i*(W/n),y:Math.random()*-H,lines:[],speed:8+Math.random()*10,typing:0};for(var k=0;k<Math.ceil(H/lh)+4;k++)c.lines.push(SRC[(i*5+k)%SRC.length]);cols.push(c)}}
+    function draw(t){var dt=Math.min(.05,(t-last)/1000||0);last=t;cx.clearRect(0,0,W,H);cx.font='600 '+fs+'px ui-monospace,Menlo,Consolas,monospace';cx.textBaseline='top';
+      cols.forEach(function(c,ci){c.y-=c.speed*dt*(reduce?.35:1);var total=c.lines.length*lh;if(c.y<-lh){c.y+=lh;c.lines.push(c.lines.shift())}
+        c.typing+=dt*22;
+        for(var k=0;k<c.lines.length;k++){var y=c.y+k*lh+H*0.02;if(y>H)break;var line=c.lines[k],isNew=(k===c.lines.length-6);
+          var txt=isNew&&!reduce?line.slice(0,Math.floor(c.typing)%(line.length+30)):line;
+          cx.fillStyle=/notify|deploy|paid/.test(line)?'rgba(30,150,80,.34)':(/await|async|export|import|function/.test(line)?'rgba(255,74,10,.36)':'rgba(11,11,12,.15)');cx.fillText(txt,c.x,y);
+          if(isNew&&!reduce&&Math.floor(t/450)%2){var w=cx.measureText(txt).width;cx.fillStyle='rgba(255,74,10,.4)';cx.fillRect(c.x+w+2,y+2,fs*.55,fs)}}});
+      if(running)requestAnimationFrame(draw)}
+    size();addEventListener('resize',function(){size();if(reduce)draw(0)});
+    if('IntersectionObserver' in window)new IntersectionObserver(function(es){var v=es[0].isIntersecting;if(v&&!running){running=true;last=performance.now();requestAnimationFrame(draw)}running=v},{threshold:0}).observe(cv);
+    requestAnimationFrame(draw)})();
   // journey connectors + replay + glow
   var links=document.querySelectorAll('.jr-link');
   if('IntersectionObserver' in window){var lo=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('on');lo.unobserve(e.target)}})},{threshold:.6});links.forEach(function(l){lo.observe(l)})}else links.forEach(function(l){l.classList.add('on')});
