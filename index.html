@@ -2,6 +2,8 @@
 <html lang="ru">
 <head>
 <meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src data: 'self'; connect-src 'none'; frame-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Жасулан — сайты, нейросети и оплата для бизнеса</title>
 <meta name="description" content="Сайты, ИИ-агенты для бизнеса, решения на нейросетях, онлайн-запись, автоответы и оплата через Kaspi для бизнеса в Казахстане. Решение под вашу задачу, код и доступы остаются у вас.">
@@ -987,10 +989,10 @@ html.js .sol.vis .mu-r:nth-of-type(2){animation-delay:.3s}html.js .sol.vis .mu-r
       <div>
         <h2>Давайте обсудим вашу задачу</h2>
         <p>Напишите в WhatsApp или Telegram, чем занимается ваш бизнес и что хотите улучшить. Отвечу с идеей решения, ценой и сроком.</p>
-        <div class="cta-row" style="margin-top:24px"><a class="btn w" id="waBig" href="https://wa.me/77079011192" target="_blank" rel="noopener">Написать в WhatsApp</a></div>
+        <div class="cta-row" style="margin-top:24px"><a class="btn w" id="waBig" href="#contact" target="_blank" rel="noopener">Написать в WhatsApp</a></div>
       </div>
       <div class="contacts">
-        <div class="ct"><div><span>WhatsApp</span><b id="wa">+7 707 901 11 92</b></div><div class="acts"><a class="btn sm w" id="waLink" href="https://wa.me/77079011192" target="_blank" rel="noopener">Открыть</a><button type="button" data-copy="wa">Копировать</button></div></div>
+        <div class="ct"><div><span>WhatsApp</span><b id="wa">номер появится через секунду</b></div><div class="acts"><a class="btn sm w" id="waLink" href="#contact" target="_blank" rel="noopener">Открыть</a><button type="button" data-copy="wa">Копировать</button></div></div>
         <div class="ct"><div><span>Telegram</span><b id="tg">@ZhasulanZhanbirbaev</b></div><div class="acts"><a class="btn sm w" href="https://t.me/ZhasulanZhanbirbaev" target="_blank" rel="noopener">Открыть</a><button type="button" data-copy="tg">Копировать</button></div></div>
         <div class="ct"><div><span>Instagram</span><b id="ig">@zhasulan.zhanbirbaev</b></div><div class="acts"><a class="btn sm w" href="https://instagram.com/zhasulan.zhanbirbaev" target="_blank" rel="noopener">Открыть</a><button type="button" data-copy="ig">Копировать</button></div></div>
       </div>
@@ -1003,12 +1005,13 @@ html.js .sol.vis .mu-r:nth-of-type(2){animation-delay:.3s}html.js .sol.vis .mu-r
 <dialog id="svcDlg" aria-labelledby="dlgT"><div class="dlg-h"><h3 id="dlgT"></h3><div class="meta"><span id="dlgP"></span><span id="dlgD"></span></div><button class="dlg-x" type="button" id="dlgX" aria-label="Закрыть">×</button></div>
 <div class="dlg-b"><div><h4>Что это</h4><p id="dlgW"></p></div><div><h4>Кому подходит</h4><p id="dlgWho"></p></div><div><h4>Что входит</h4><ul id="dlgI"></ul></div><div class="dlg-ex" id="dlgE"></div><p class="dlg-note" id="dlgN"></p>
 <div class="dlg-cta"><a class="btn" id="dlgWa" href="#" target="_blank" rel="noopener">Обсудить в WhatsApp</a><button class="btn w" type="button" id="dlgC">Закрыть</button></div></div></dialog>
-<a class="btn fab" id="fab" href="https://wa.me/77079011192" target="_blank" rel="noopener">WhatsApp</a>
+<a class="btn fab" id="fab" href="#contact" target="_blank" rel="noopener">WhatsApp</a>
 
 <script>
 (function(){
-  var WA='77079011192',msg=encodeURIComponent('Здравствуйте! Хочу обсудить задачу для своего бизнеса.');
+  var WA=['7','707','901','11','92'].join(''),msg=encodeURIComponent('Здравствуйте! Хочу обсудить задачу для своего бизнеса.');
   ['waLink','waBig','fab'].forEach(function(id){var a=document.getElementById(id);if(a)a.href='https://wa.me/'+WA+'?text='+msg});
+  (function(){var w=document.getElementById('wa');if(w)w.textContent='+7 '+WA.slice(1,4)+' '+WA.slice(4,7)+' '+WA.slice(7,9)+' '+WA.slice(9)})();
   // copy
   document.querySelectorAll('[data-copy]').forEach(function(b){b.addEventListener('click',function(){
     var t=document.getElementById(b.dataset.copy).textContent,done=function(){var o=b.textContent;b.textContent='Скопировано';setTimeout(function(){b.textContent=o},1400)};
