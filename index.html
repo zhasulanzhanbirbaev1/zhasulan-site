@@ -7,6 +7,8 @@
 <meta name="description" content="Сайты, решения на нейросетях, онлайн-запись, автоответы и оплата через Kaspi для бизнеса в Казахстане. Решение под вашу задачу, код и доступы остаются у вас.">
 <meta property="og:title" content="Жасулан — решения для бизнеса">
 <meta property="og:description" content="Сайты и решения на нейросетях, онлайн-запись, автоответы и оплата через Kaspi. Каждая заявка получает ответ сразу.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 64 64%27%3E%3Crect x=%274%27 y=%274%27 width=%2756%27 height=%2756%27 fill=%27%23FF4A0A%27 stroke=%27%230B0B0C%27 stroke-width=%276%27/%3E%3Ctext x=%2732%27 y=%2746%27 text-anchor=%27middle%27 font-family=%27Arial Black,Arial%27 font-weight=%27900%27 font-size=%2738%27 fill=%27%230B0B0C%27%3E%D0%96%3C/text%3E%3C/svg%3E">
+<meta name="theme-color" content="#FF4A0A">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Pangolin&family=Onest:wght@400;500;600;700;800&display=swap">
@@ -134,6 +136,7 @@ html.js .rv.in{opacity:1;transform:rotate(var(--r,0deg));transition:opacity .45s
 .mini b{display:block;font:800 16px var(--display)}
 .mini span{font-size:14px;color:var(--muted)}
 .mini i{display:block;font-style:normal;font-weight:800;margin-top:6px}
+.mini i small{font-size:13px;font-weight:700;color:var(--muted)}
 
 /* DEMO: phone + pay */
 .demo{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(24px,5vw,60px);align-items:center}
@@ -141,7 +144,7 @@ html.js .rv.in{opacity:1;transform:rotate(var(--r,0deg));transition:opacity .45s
 .steps-mini{display:grid;gap:12px;counter-reset:s;margin:0;padding:0;list-style:none}
 .steps-mini li{counter-increment:s;display:grid;grid-template-columns:40px 1fr;gap:12px;align-items:start;font-weight:600}
 .steps-mini li::before{content:counter(s);display:grid;place-items:center;width:36px;height:36px;background:var(--sun);border:3px solid var(--ink);font:900 16px var(--display)}
-.stagebox{background:var(--ht),var(--peach);border:var(--b);box-shadow:12px 12px 0 var(--ink);padding:30px 20px;display:grid;place-items:center;min-height:620px;position:relative;overflow:hidden}
+.stagebox{background:var(--ht),var(--peach);border:var(--b);box-shadow:12px 12px 0 var(--ink);padding:30px 20px;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:620px;position:relative;overflow:hidden}
 .phone{width:300px;max-width:100%;height:560px;background:var(--card);border:5px solid var(--ink);border-radius:42px;box-shadow:8px 8px 0 var(--ink);overflow:hidden;display:flex;flex-direction:column;position:relative}
 .ph-top{background:var(--ink);color:var(--paper);padding:20px 20px 14px;font-weight:800;font-size:17px}
 .ph-top small{display:block;font-weight:500;opacity:.65;font-size:12px}
@@ -161,7 +164,6 @@ html.js .rv.in{opacity:1;transform:rotate(var(--r,0deg));transition:opacity .45s
 .notif b{display:block;font-size:15px}
 .notif span{font-size:13px;color:var(--muted)}
 .replay{position:static;margin-top:22px}
-.stagebox{display:flex;flex-direction:column;align-items:center;justify-content:center}
 
 /* CALCULATOR */
 .calc{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:26px}
@@ -263,12 +265,10 @@ html.js .jr-art.in .slide,html.js .jr-art.in .pop2{transition:opacity .4s .6s,tr
 main,header,footer{position:relative;z-index:1}
 /* code texture behind demo */
 #demo{position:relative}
-#demo::before{content:"> claude \"сделай онлайн-запись для салона\"\A  ✓ страница записи\A  ✓ выбор времени\A  ✓ оплата через Kaspi\A  ✓ уведомление владельцу\A> deploy";white-space:pre;position:absolute;right:max(20px,4vw);top:0;font:600 14px/1.7 ui-monospace,Menlo,Consolas,monospace;color:rgba(11,11,12,.13);pointer-events:none}
 @media (max-width:760px){
   .jr{grid-template-columns:minmax(0,1fr)}
   .jr.r .jr-art{order:0}
   .jr-link{height:70px}
-  #demo::before{display:none}
 }
 @media (prefers-reduced-motion:reduce){html.js .draw{stroke-dashoffset:0!important}.hl::after{--hs:1!important}html.js .jr-art .grow{transform:none!important}html.js .jr-art .slide,html.js .jr-art .pop2{opacity:1!important;transform:none!important}}
 
@@ -349,6 +349,165 @@ h1,h2,h3{font-weight:400;letter-spacing:0}
   *,*::before,*::after{animation:none!important;transition:none!important}
   html.js .rv{opacity:1!important;transform:rotate(var(--r,0deg))!important}
 }
+
+/* ===== v2: realistic step mockups ===== */
+.jr-art{padding:16px}
+.mk{position:relative;min-height:372px;display:grid;place-items:center;font-family:var(--body);color:var(--ink)}
+.mk *{box-sizing:border-box}
+/* step 1: chat */
+.mk-phone{width:min(280px,100%);height:372px;background:#fff;border:4px solid var(--ink);border-radius:30px;box-shadow:6px 6px 0 var(--ink);overflow:hidden;display:flex;flex-direction:column}
+.mk-bar{display:flex;align-items:center;gap:10px;padding:12px 14px;background:var(--ink);color:var(--paper)}
+.mk-bar .av{width:32px;height:32px;border-radius:50%;background:var(--orange);border:2px solid var(--paper);display:grid;place-items:center;font:400 15px var(--display);color:var(--ink)}
+.mk-bar b{display:block;font-size:14px;line-height:1.1}.mk-bar small{font-size:11px;color:#8FE3A8}
+.mk-msgs{flex:1;padding:10px;display:flex;flex-direction:column;justify-content:flex-end;gap:7px;background:#F4F1EC;overflow:hidden}
+.mk .m{margin:0;max-width:86%;padding:8px 11px 6px;border:2px solid var(--ink);border-radius:14px;font-size:12.5px;font-weight:600;line-height:1.3}
+.mk .m time{display:block;text-align:right;font-size:10px;font-weight:600;opacity:.55;margin-top:2px}
+.mk .m.in{background:#fff;align-self:flex-start;border-bottom-left-radius:4px}
+.mk .m.out{background:var(--peach);align-self:flex-end;border-bottom-right-radius:4px}
+.mk .typing{display:flex;gap:4px;padding:10px 12px}
+.mk .typing i{width:7px;height:7px;border-radius:50%;background:var(--ink);opacity:.4;animation:dot 1s infinite}
+.mk .typing i:nth-child(2){animation-delay:.15s}.mk .typing i:nth-child(3){animation-delay:.3s}
+@keyframes dot{30%{opacity:1;transform:translateY(-3px)}}
+.mk-input{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:0 10px 10px;padding:7px 8px 7px 14px;border:2px solid var(--ink);border-radius:20px;font-size:12px;color:var(--muted)}
+.mk-input i{width:22px;height:22px;border-radius:50%;background:var(--orange);border:2px solid var(--ink)}
+/* step 2: call */
+.mk-call{grid-template-columns:1fr;gap:10px;place-items:stretch;background:#16161A;border:4px solid var(--ink);border-radius:14px;padding:12px;box-shadow:6px 6px 0 var(--ink);color:#F3EFE8;min-height:0}
+.call-top{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:700}
+.call-top .rec{width:10px;height:10px;border-radius:50%;background:#FF4A0A;animation:blink 1.2s infinite}
+.call-top time{margin-left:auto;font-variant-numeric:tabular-nums;opacity:.8}
+@keyframes blink{50%{opacity:.25}}
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.tile{position:relative;aspect-ratio:4/3.4;border-radius:10px;overflow:hidden;background:#2A2A31;border:2px solid #3A3A44}
+.tile img{width:100%;height:100%;object-fit:cover;object-position:50% 20%;display:block}
+.tile .nm{position:absolute;left:6px;bottom:6px;font-size:11px;font-weight:700;background:rgba(11,11,12,.7);padding:2px 7px;border-radius:6px}
+.tme{border-color:#38C46A;box-shadow:0 0 0 2px rgba(56,196,106,.35)}
+.tcl{display:grid;place-items:center;background:linear-gradient(160deg,#3B3445,#2A2A31)}
+.tcl .ini{width:56px;height:56px;border-radius:50%;background:var(--sun);color:var(--ink);display:grid;place-items:center;font:400 20px var(--display);border:3px solid var(--ink)}
+.wave{position:absolute;right:6px;bottom:7px;display:flex;gap:2px;align-items:flex-end;height:14px}
+.wave b{width:3px;height:100%;background:#38C46A;border-radius:2px;animation:wv .9s ease-in-out infinite;transform-origin:50% 100%}
+.wave b:nth-child(2){animation-delay:.2s}.wave b:nth-child(3){animation-delay:.4s}.wave b:nth-child(4){animation-delay:.1s}.wave b:nth-child(5){animation-delay:.3s}
+@keyframes wv{0%,100%{transform:scaleY(.3)}50%{transform:scaleY(1)}}
+.notes{background:#fff;color:var(--ink);border-radius:8px;padding:8px 10px;font-size:12px}
+.notes b{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+.notes ul{margin:4px 0 0;padding:0;list-style:none;display:grid;gap:2px;font-weight:700}
+.notes li::before{content:"✓ ";color:#1E9650}
+.ctrls{display:flex;justify-content:center;gap:10px}
+.ctrls i{width:34px;height:34px;border-radius:50%;background:#2E2E36;display:grid;place-items:center}
+.ctrls i.end{background:#E5402A}
+.ctrls svg{width:18px;height:18px;fill:none;stroke:#fff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.ctrls i.end svg{fill:#fff;stroke:none}
+/* step 3: proposal */
+.mk-doc .doc{position:relative;width:min(300px,100%);background:#fff;border:3px solid var(--ink);box-shadow:6px 6px 0 var(--ink);padding:16px 16px 18px;transform:rotate(-1.5deg)}
+.doc-h{border-bottom:3px solid var(--ink);padding-bottom:8px;margin-bottom:8px}
+.doc-h b{display:block;font-size:14px}.doc-h small{font-size:11px;color:var(--muted)}
+.doc .row{display:flex;justify-content:space-between;gap:10px;font-size:12.5px;padding:6px 0;border-bottom:1.5px dashed #CFC8BE}
+.doc .row b{white-space:nowrap}
+.doc .row.tot{border-bottom:0;font-size:15px;padding-top:9px}
+.doc .row.tot b{color:var(--orange)}
+.doc-pay{margin-top:6px;font-size:12px;font-weight:700;background:var(--peach);border:2px solid var(--ink);padding:5px 8px}
+.doc .row.tot{position:relative}
+.doc .row.tot::after{content:"";position:absolute;left:-10px;right:-10px;top:0;bottom:-4px;border:3px solid var(--orange);border-radius:50%/60%;transform:rotate(-1.5deg) scale(var(--cs,1));transition:transform .5s 1.4s cubic-bezier(.2,1.4,.4,1);pointer-events:none}
+html.js .jr-art:not(.in) .doc .row.tot::after{--cs:0}
+.nt i svg{width:16px;height:16px}
+.okstamp{position:absolute;right:-10px;bottom:-14px;font:400 15px var(--display);text-transform:uppercase;color:#1E9650;border:3px solid #1E9650;padding:4px 10px;background:rgba(255,255,255,.92);transform:rotate(-10deg)}
+/* step 4: site build */
+.mk-web{grid-template-columns:1fr;gap:10px;place-items:stretch;min-height:0}
+.win{position:relative;background:#fff;border:3px solid var(--ink);box-shadow:6px 6px 0 var(--ink);overflow:visible}
+.win-bar{display:flex;align-items:center;gap:5px;padding:7px 9px;border-bottom:3px solid var(--ink);background:#F4F1EC}
+.win-bar i{width:9px;height:9px;border-radius:50%;background:#FF4A0A}.win-bar i:nth-child(2){background:#FFD84A}.win-bar i:nth-child(3){background:#38C46A}
+.win-bar span{margin-left:8px;flex:1;font-size:11px;font-weight:600;color:var(--muted);background:#fff;border:1.5px solid #CFC8BE;border-radius:10px;padding:1px 10px}
+.site{padding:10px 12px 12px;display:grid;gap:10px}
+.s-nav{display:flex;align-items:center;gap:10px;font-size:10.5px;color:var(--muted);font-weight:600}
+.s-nav b{font:400 15px var(--display);color:var(--ink);margin-right:auto}
+.s-hero{display:grid;grid-template-columns:1.2fr .8fr;gap:8px;align-items:center;background:#F7EFE6;border-radius:8px;padding:10px}
+.s-copy h5{margin:0;font:400 15px/1.05 var(--display)}
+.s-copy p{font-size:11px;color:var(--muted);margin:5px 0 7px}
+.s-copy em{font-style:normal;display:inline-block;background:var(--orange);border:2px solid var(--ink);font-size:11px;font-weight:800;padding:4px 10px;border-radius:6px}
+.s-pic{width:100%;height:auto;max-height:110px;object-fit:contain}
+.s-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.s-cards div{border:1.5px solid #CFC8BE;border-radius:6px;padding:5px 7px;font-size:10.5px;font-weight:600}
+.s-cards b{display:block;font-size:12px}
+.pin{position:absolute;right:-8px;top:96px;background:var(--sun);border:2.5px solid var(--ink);box-shadow:3px 3px 0 var(--ink);font:400 13px var(--hand);padding:3px 9px;transform:rotate(4deg)}
+.bld{display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center;font-weight:800;font-size:13px}
+.bld .bar{height:14px;border:3px solid var(--ink);background:#fff}
+.bld .bar i{display:block;height:100%;background:var(--orange);transform-origin:0 50%}
+.bld .pct{font-variant-numeric:tabular-nums;min-width:4ch;text-align:right}
+/* step 5: notifications */
+.mk-ntf .lock{width:min(290px,100%);background:linear-gradient(170deg,#2B2440,#16161A 70%);border:4px solid var(--ink);border-radius:28px;box-shadow:6px 6px 0 var(--ink);padding:18px 12px 14px;color:#fff;display:grid;gap:7px}
+.clock{font:400 40px/1 var(--display);text-align:center}
+.date{text-align:center;font-size:11px;opacity:.7;margin-bottom:6px}
+.nt{display:grid;grid-template-columns:30px 1fr auto;gap:9px;align-items:center;background:rgba(255,255,255,.94);color:var(--ink);border-radius:14px;padding:8px 10px}
+.nt i{width:30px;height:30px;border-radius:9px;display:grid;place-items:center;font-style:normal;font-weight:900;border:2px solid var(--ink)}
+.nt i.ic-g{background:var(--green)}.nt i.ic-o{background:var(--orange)}.nt i.ic-y{background:var(--sun)}
+.nt b{display:block;font-size:12.5px;line-height:1.2}.nt span{font-size:11px;color:var(--muted)}
+.nt small{font-size:10px;color:var(--muted);align-self:start}
+.boom{position:absolute;right:-16px;top:-26px;width:132px;height:132px;display:grid;place-items:center;font:400 10.5px var(--display);text-transform:uppercase}
+.boom svg{position:absolute;inset:0;width:100%;height:100%;animation:spin 14s linear infinite}
+.boom span{position:relative}
+/* step mockup entrance (run when panel gets .in) */
+html.js .jr-art:not(.in) .mk .m,html.js .jr-art:not(.in) .doc .row,html.js .jr-art:not(.in) .doc-pay,html.js .jr-art:not(.in) .nt,html.js .jr-art:not(.in) .notes li,html.js .jr-art:not(.in) .s-hero,html.js .jr-art:not(.in) .s-cards div,html.js .jr-art:not(.in) .pin,html.js .jr-art:not(.in) .okstamp,html.js .jr-art:not(.in) .boom,html.js .jr-art:not(.in) .tile{opacity:0}
+html.js .jr-art.in .mk .m{animation:mIn .45s cubic-bezier(.2,1.4,.4,1) both}
+html.js .jr-art.in .m1{animation-delay:.5s}html.js .jr-art.in .m2{animation-delay:1.3s}html.js .jr-art.in .m3{animation-delay:2.1s}html.js .jr-art.in .m4{animation-delay:2.8s}
+@keyframes mIn{from{opacity:0;transform:translateY(14px) scale(.85)}}
+html.js .jr-art.in .tile{animation:mIn .5s cubic-bezier(.2,1.4,.4,1) both}html.js .jr-art.in .tcl{animation-delay:.25s}
+html.js .jr-art.in .notes li{animation:slideL .4s ease-out both}
+html.js .jr-art.in .notes li:nth-child(1){animation-delay:.9s}html.js .jr-art.in .notes li:nth-child(2){animation-delay:1.5s}html.js .jr-art.in .notes li:nth-child(3){animation-delay:2.1s}
+@keyframes slideL{from{opacity:0;transform:translateX(-14px)}}
+html.js .jr-art.in .doc .row,html.js .jr-art.in .doc-pay{animation:slideL .4s ease-out both}
+html.js .jr-art.in .r1{animation-delay:.4s}html.js .jr-art.in .r2{animation-delay:.6s}html.js .jr-art.in .r3{animation-delay:.8s}html.js .jr-art.in .r4{animation-delay:1s}html.js .jr-art.in .r5{animation-delay:1.2s}
+html.js .jr-art.in .okstamp{animation:stampIn .45s 2.4s cubic-bezier(.2,1.4,.4,1) both}
+@keyframes stampIn{from{opacity:0;transform:rotate(-10deg) scale(2.2)}}
+html.js .jr-art.in .s-hero{animation:mIn .5s .5s both}
+html.js .jr-art.in .s-cards div{animation:mIn .45s cubic-bezier(.2,1.4,.4,1) both}
+html.js .jr-art.in .s-cards div:nth-child(1){animation-delay:.9s}html.js .jr-art.in .s-cards div:nth-child(2){animation-delay:1.1s}html.js .jr-art.in .s-cards div:nth-child(3){animation-delay:1.3s}
+html.js .jr-art.in .pin{animation:stampIn .45s 1.9s cubic-bezier(.2,1.4,.4,1) both}
+html.js .jr-art.in .nt{animation:ntIn .5s cubic-bezier(.2,1.4,.4,1) both}
+html.js .jr-art.in .n1{animation-delay:.5s}html.js .jr-art.in .n2{animation-delay:1.2s}html.js .jr-art.in .n3{animation-delay:1.9s}
+@keyframes ntIn{from{opacity:0;transform:translateY(-24px) scale(.9)}}
+html.js .jr-art.in .boom{animation:stampIn .5s 2.4s cubic-bezier(.2,1.4,.4,1) both}
+.jr-art .grow{transform-origin:0 50%}
+
+/* ===== v2: extra motion ===== */
+html.js .hero h1>span{display:block}
+html.js .hero h1.rv:not(.in)>span{opacity:0;transform:translateX(-40px) skewX(-8deg)}
+html.js .hero h1.in>span{animation:lineIn .6s cubic-bezier(.2,1.4,.4,1) both}
+html.js .hero h1.in>span:nth-child(2){animation-delay:.12s}html.js .hero h1.in>span:nth-child(3){animation-delay:.24s}html.js .hero h1.in>span:nth-child(4){animation-delay:.36s}
+@keyframes lineIn{from{opacity:0;transform:translateX(-40px) skewX(-8deg)}}
+.hb.in{animation:float 4.2s ease-in-out infinite}.hb2.in{animation-delay:-1.4s}.hb3.in{animation-delay:-2.8s}
+@keyframes float{50%{translate:0 -8px}}
+.sec-head h2 em{display:inline-block;transform-origin:30% 80%}
+html.js .sec-head h2.in em{animation:emPop .55s .35s cubic-bezier(.2,1.6,.4,1) both}
+@keyframes emPop{from{transform:scale(.6) rotate(-6deg);opacity:0}}
+.btn{position:relative;overflow:hidden}
+.btn::after{content:"";position:absolute;top:0;bottom:0;left:-60%;width:40%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.55),transparent);transform:skewX(-20deg);transition:left .5s ease-out;pointer-events:none}
+.btn:hover::after{left:130%}
+.fab{animation:fabPulse 2.6s ease-in-out infinite}
+@keyframes fabPulse{0%,100%{box-shadow:6px 6px 0 var(--ink)}50%{box-shadow:6px 6px 0 var(--ink),0 0 0 8px rgba(255,74,10,.25)}}
+.ticker:hover div{animation-play-state:paused}
+.result .sum.bump{animation:bump .35s cubic-bezier(.2,1.6,.4,1)}
+@keyframes bump{40%{transform:scale(1.08) rotate(-1deg)}}
+.faq details[open] p{animation:mIn .35s ease-out}
+.ph-msg.typing{display:flex;gap:4px;align-self:flex-start;background:#F1EEE9;padding:12px 14px}
+.ph-msg.typing i{width:7px;height:7px;border-radius:50%;background:var(--ink);opacity:.4;animation:dot 1s infinite}
+.ph-msg.typing i:nth-child(2){animation-delay:.15s}.ph-msg.typing i:nth-child(3){animation-delay:.3s}
+.top .btn .s{display:none}
+
+/* ===== v2: fixes ===== */
+.more{grid-template-columns:repeat(5,minmax(0,1fr))}
+@media (max-width:1000px){.more{grid-template-columns:repeat(2,minmax(0,1fr))}.more>:last-child:nth-child(odd){grid-column:1/-1}}
+@media (max-width:640px){
+  .more{grid-template-columns:minmax(0,1fr)}
+  .top .btn{display:inline-flex}.top .btn .l{display:none}.top .btn .s{display:inline}
+  .hb3{top:auto;bottom:70px}
+  .mk-phone{height:396px}.mk{min-height:396px}
+  .pin{right:-4px;top:84px;font-size:12px}
+  .boom{width:112px;height:112px;font-size:9px;right:-8px;top:-22px}
+}
+@media (prefers-reduced-motion:reduce){
+  html.js .jr-art .mk *{opacity:1!important}
+  html.js .jr-art .doc .row.tot::after{--cs:1}
+  html.js .hero h1>span{opacity:1!important;transform:none!important}
+}
 </style>
 <script>document.documentElement.classList.add('js')</script>
 </head>
@@ -360,7 +519,7 @@ h1,h2,h3{font-weight:400;letter-spacing:0}
     <nav class="menu" aria-label="Меню">
       <a href="#services">Услуги</a><a href="#demo">Как работает</a><a href="#calc">Калькулятор</a><a href="#about">Обо мне</a><a href="#faq">Вопросы</a>
     </nav>
-    <a class="btn sm" href="#contact">Обсудить задачу</a>
+    <a class="btn sm" href="#contact"><span class="l">Обсудить задачу</span><span class="s">Написать</span></a>
   </div>
 </header>
 
@@ -442,11 +601,11 @@ h1,h2,h3{font-weight:400;letter-spacing:0}
         <span class="more-l">Подробнее →</span><div class="price"><b>по задаче</b><span>цена после оценки</span></div></article>
     </div>
     <div class="more">
-      <div data-svc="company" tabindex="0" role="button" class="mini rv"><b>Сайт компании</b><span>Несколько страниц, админка, аналитика</span><i>от 180 000 ₸ · 2–3 нед.</i><span class="more-l">Подробнее →</span></div>
-      <div data-svc="crm" tabindex="0" role="button" class="mini rv" style="--d:.05s"><b>CRM-система</b><span>Клиенты и сделки по этапам, отчёты</span><i>от 150 000 ₸ · 1–2 нед.</i><span class="more-l">Подробнее →</span></div>
-      <div data-svc="parser" tabindex="0" role="button" class="mini rv" style="--d:.1s"><b>Парсер</b><span>Цены и данные с сайтов по расписанию</span><i>от 30 000 ₸ · 1–3 дня</i><span class="more-l">Подробнее →</span></div>
-      <div data-svc="app" tabindex="0" role="button" class="mini rv" style="--d:.15s"><b>Приложение</b><span>iOS и Android из одного кода</span><i>от 360 000 ₸ · от 4 нед.</i><span class="more-l">Подробнее →</span></div>
-      <div data-svc="design" tabindex="0" role="button" class="mini rv" style="--d:.2s"><b>Дизайн и 3D</b><span>Макеты, 3D-модели товаров на сайте</span><i>от 50 000 ₸ · 2–7 дней</i><span class="more-l">Подробнее →</span></div>
+      <div data-svc="company" tabindex="0" role="button" class="mini rv"><b>Сайт компании</b><span>Несколько страниц, админка, аналитика</span><i>от 180 000 ₸<br><small>2–3 нед.</small></i><span class="more-l">Подробнее →</span></div>
+      <div data-svc="crm" tabindex="0" role="button" class="mini rv" style="--d:.05s"><b>CRM-система</b><span>Клиенты и сделки по этапам, отчёты</span><i>от 150 000 ₸<br><small>1–2 нед.</small></i><span class="more-l">Подробнее →</span></div>
+      <div data-svc="parser" tabindex="0" role="button" class="mini rv" style="--d:.1s"><b>Парсер</b><span>Цены и данные с сайтов по расписанию</span><i>от 30 000 ₸<br><small>1–3 дня</small></i><span class="more-l">Подробнее →</span></div>
+      <div data-svc="app" tabindex="0" role="button" class="mini rv" style="--d:.15s"><b>Приложение</b><span>iOS и Android из одного кода</span><i>от 360 000 ₸<br><small>от 4 нед.</small></i><span class="more-l">Подробнее →</span></div>
+      <div data-svc="design" tabindex="0" role="button" class="mini rv" style="--d:.2s"><b>Дизайн и 3D</b><span>Макеты, 3D-модели товаров на сайте</span><i>от 50 000 ₸<br><small>2–7 дней</small></i><span class="more-l">Подробнее →</span></div>
     </div>
   </div>
 </section>
@@ -507,15 +666,62 @@ h1,h2,h3{font-weight:400;letter-spacing:0}
   <div class="wrap">
     <div class="sec-head"><span class="pageno">Страница 5 · Как работаем</span><h2 class="rv">От заявки до запуска <em>без сюрпризов</em></h2><p class="rv">Пример заказа: сайт с онлайн-записью для салона.</p></div>
     <ol class="journey" id="journey">
-      <li class="jr l"><div class="jr-art panel rv slam" style="--r:-1.5deg"><svg viewBox="0 0 360 260"><rect x="110" y="18" width="140" height="228" rx="22" fill="#fff" stroke="#0B0B0C" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/><rect x="110" y="18" width="140" height="44" rx="22" fill="#0B0B0C"/><text x="180" y="47" text-anchor="middle" font-family="Onest,sans-serif" font-weight="800" font-size="16" fill="#F3EFE8">WhatsApp</text><path d="M128 84h104v58h-60l-18 16v-16h-26z" fill="#FFE3D6" stroke="#0B0B0C" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/><text x="138" y="108" font-family="Onest,sans-serif" font-weight="800" font-size="14" fill="#0B0B0C">Нужен сайт</text><text x="138" y="128" font-family="Onest,sans-serif" font-weight="800" font-size="14" fill="#0B0B0C">с записью</text><g class="pulse"><circle cx="262" cy="40" r="26" fill="#FF4A0A" stroke="#0B0B0C" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/><text x="262" y="48" text-anchor="middle" font-family="Unbounded,sans-serif" font-weight="900" font-size="22" fill="#0B0B0C">1</text></g><path d="M40 200l40-20M30 160l44 4M48 120l36 22" stroke="#0B0B0C" stroke-width="5" stroke-linejoin="round" stroke-linecap="round" fill="none"/></svg></div><div class="jr-txt rv" style="--d:.15s"><span class="jr-n">Шаг 1</span><h3>Заявка</h3><p>Пишете в WhatsApp или Telegram, чем занимается бизнес и что хотите улучшить.</p><span class="cap">в тот же день</span></div></li>
+      <li class="jr l"><div class="jr-art panel rv slam" style="--r:-1.5deg"><div class="mk mk-chat" aria-hidden="true">
+        <div class="mk-phone">
+          <div class="mk-bar"><span class="av">Ж</span><div><b>Жасулан</b><small>в сети</small></div></div>
+          <div class="mk-msgs">
+            <p class="m out m1">Здравствуйте! Нужен сайт с онлайн-записью для салона<time>10:14 ✓✓</time></p>
+            <p class="m in m2">Здравствуйте! Сделаем. Созвонимся сегодня на 15 минут?<time>10:16</time></p>
+            <p class="m out m3">Да, давайте в 15:00<time>10:17 ✓✓</time></p>
+            <p class="m in m4 typing"><i></i><i></i><i></i></p>
+          </div>
+          <div class="mk-input"><span>Сообщение</span><i></i></div>
+        </div></div></div><div class="jr-txt rv" style="--d:.15s"><span class="jr-n">Шаг 1</span><h3>Заявка</h3><p>Пишете в WhatsApp или Telegram, чем занимается бизнес и что хотите улучшить.</p><span class="cap">в тот же день</span></div></li>
       <li class="jr-link" aria-hidden="true"><svg viewBox="0 0 680 120" preserveAspectRatio="none"><path class="draw" pathLength="1" d="M120 10 C 120 90, 560 30, 560 110" fill="none" stroke="#0B0B0C" stroke-width="4" stroke-dasharray="1" stroke-linecap="round"/></svg></li>
-      <li class="jr r"><div class="jr-art panel rv slam" style="--r:1.5deg"><svg viewBox="0 0 360 260"><rect x="60" y="40" width="240" height="150" fill="#fff" stroke="#0B0B0C" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/><rect x="74" y="54" width="102" height="122" fill="#DDEFC9" stroke="#0B0B0C" stroke-width="4"/><rect x="184" y="54" width="102" height="122" fill="#FF4A0A" stroke="#0B0B0C" stroke-width="4"/><circle cx="125" cy="108" r="22" fill="#F1C9A5" stroke="#0B0B0C" stroke-width="4"/><path d="M103 104q22-30 44 0" fill="#0B0B0C"/><path d="M90 176q35-40 70 0" fill="#fff" stroke="#0B0B0C" stroke-width="4"/><circle cx="235" cy="108" r="22" fill="#F1C9A5" stroke="#0B0B0C" stroke-width="4"/><path d="M213 100q22-26 44 0" fill="#0B0B0C"/><path d="M200 176q35-40 70 0" fill="#fff" stroke="#0B0B0C" stroke-width="4"/><path d="M30 190h300l-24 30H54z" fill="#fff" stroke="#0B0B0C" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/><g class="pop2"><path d="M212 4h128v44h-90l-16 14v-14h-22z" fill="#0B0B0C" stroke="#0B0B0C" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/><text x="228" y="32" font-family="Onest,sans-serif" font-weight="800" font-size="15" fill="#FFD84A">завтра? да ✓</text></g></svg></div><div class="jr-txt rv" style="--d:.15s"><span class="jr-n">Шаг 2</span><h3>Созвон</h3><p>Задаю вопросы и разбираюсь в задаче. Если ТЗ нет, пишу его сам.</p><span class="cap">15–30 минут</span></div></li>
+      <li class="jr r"><div class="jr-art panel rv slam" style="--r:1.5deg"><div class="mk mk-call" aria-hidden="true">
+        <div class="call-top"><span class="rec"></span>Созвон<time class="ctime">00:00</time></div>
+        <div class="tiles">
+          <div class="tile tme"><img src="data:image/webp;base64,UklGRu4dAABXRUJQVlA4IOIdAADwZQCdASrcAMgAPnk2lkekoyIhKPRsYJAPCWVu3V8kPKiBvfqUdvHItj/7z1ZbdLzM/t96tfnFeoB/gOqN9ADwbvh8wGDsd/yPgz5WfiUljw81I+8v+j69v7T/l+D/7n/O+gL7g/1fsHvhMaHqF94v+J4Hv+x/i/8H7D/pP9g/3n99+AL8tPXP/b/rp5TP4H/WewD/Of7F/6P8T/kvd70NfW/7W/Av/QP79/4eyZ6T37JISViZCxLWnoX+NI3ZPi8Lvoyl4RIxrOfarwWfwfCEH0rMNn9txxFuVd/hRLa5vqyP5gubZoXpAXxMlgwf1jYe2lM1psLBOuyyvCsls/B080q+/Q9VT8fXyi6RPJ6ab8YYyrelf+IZuB0hjWEncY7HryWOGNIlOpat+Nw48Ls4M8WvLCxwkAXL91y9zCWEePs6hDl1fqT2kG5rS7BMrELjLFwSU8z1wWbLM9cglupHBFq6slnTJf8iwlUUhuIN2m56yPPNr3RzoOkNxlqZRFktsc84POUbIRpzqJzW92QWKy6il/TbhEVUP+Mxopuys2CTaIHhrjGzDYmZ08HnMkr0AgaYUuKGJf2LyTF10Drb8SFNZVeHa7amCBG20SqjxDU/skmz3Iz4M/pqr71FpwN6jyWMSmM4m14j/+j1RCctCfOYZyiauicwmIIDuCBuIrC1bwqWobwFvy99W4ID+99fR7aSN//AKQ/d+p/SV2Qoe48RL9xnzO0BNZ8qfsXaC6XCvSFsk376KlIV4ti7kDI/dR8cMinyGw9dpILzTQoUrimvFyOzm+GdxnZwGm1P/jNs2PxmI36dk/rFkQgo9TioX4fQZ/oNJMB3jVArnD6t6z9EeSAw1TVYPeD7kEqnzPjQG5n7MKs34tO8BkF8C0/dCPDWPiKYYS8TK/HxluE3dhV3Jvz67KT/8cL+j0wLLV2oxPN6XCV59fC7o9tCawT9RhZPtHkoN7wkhI7peTG3tzvROO8VT/011Sp0912tBCmQasAtH9e4stu1GnT2A/x2CgDXqXPeMLbKYomiFAu0X7b7itk1LvyyWwdSZ+XF6kNH5lDHpBNZJDfpa4YalMDZZTRs2BY+YAD++fFvOuTZmpQBzudY9lOUN5N5WmlcWDbB9xdBxALGs5HWbiWrceZ4ji4V1JUXNlxk3B70sJurdxw1rX6filf+6E5WvB/dGh+bdH+H45Hd86WnUlY97KJQiWzpDQco27q0me/6MoMid9agkbA5Zkwa1oExaltIP56Kr2iPD+DFGtTaRKgaM12ljgfLfFUlZKMRSl1PaxlJ5TQFumLNtDn4pZWsoftzgRX8K2pg3qHwQ1y9k9DVhWKRer6OxVB2R6Q7ciHRxgf8dibTIImBzbGbhORGsqvXIYG/bXs4EvN3L0XEJI48g64YoK9hSXPBeG5c1FqWsbGeWYbFUn1dDx4GZZstAcOi3IERqu3wyxvT3DJeqCYHgaLfXy3S/ZhJsNk2ZgnueUrt9FHaxKNq9Yw5Vls6NCIoVSbKe8CcibfSB+0MjtxYpW7eoIbRFb4ks+0iB49ZrH90l9/scAPDC9yytBXUWXaIv6OIxA02+kwvu2L/fSPoxza4AGp5vsbsW4jPVjT6q9s32NFASqwZ1y82vtuQtj7M4VbFlY/Junt73DJ20kx81WcHIBAQJztne3LFrtz6okTttl6GXeiLD/iPIbfCcfB8DdASon7bBCaC3ZUf3pyg2902fwnKdClLaPf3P+UCO3/vwO13VTkLL35HcsqQCadYMbqkSHzrjHiflY84RT43yfVnErk1FQILzce3nIMqOaDsVexNfabJgW2Vtw6LfWkMjTicgf0Bw1lutg/jx9YehKwkL7zJQG3ljv95BHHdJrX+QlvSgzxX3M9JhKi2NQ9DLQAh0LvGqBM5a2+b87I0EU8LvQDPqIipkJYtQsv1BxQKLgAxcyyCj+zoUV3NQUvcITeY3vuSYev1HqFm5BrDjM4sCj9/mYP2kNhNBogs98XY6DvUJ8V3nYCE0iu3+uisVRC8WThzxTkpwbSf18QPsYwHB47CzpLMF06WPcdMt7m3L3HSc5vEQL3+azwCqmdFtRFRbTwIWnCdEbrwhYQr3nHI0SmwE3p2ABnkxrC8u76bSA7MDZ0FTkaAmEfroqStNXBt9/qzhQYjrsGH5hMtMD2eieYSa0NIKFZN93x/nrgYFclSDPbnHjoCZrpRx9eNLcwAtfUfuLMsljUGX3ioSl63cbt636kb461Qs6llSCp/g6ze4Yys7i5qP9WN/ksV9MlriALfraZZ/nG5W9EON2rhtJWKGMWN/z0YX5HNsUv7vNjyu8/Hi2SAmkkymO8171qBPfFVEeOKNAkR04OFCieA4PmhzSxA6/al6P+EsKQu0LfeLe1f9bMOfErr4MwMYyQMDVVZ4leraG0iXMt2CGIZ28VjwHkAJVfI2S+nFJo7f71n+RpUVGNZj3eZubw2xFavCEmg5En8MJm7j8rSTCGm39eDgRRxqP16nhWInD6WEd4o82GgSVPTV//2t0sjZtP0Q0nKQ3a//fynlHqG3jdl0Zzano8tmGVmvM8Pv164tpit4HQPF5QruXyZaOmbV6B/HkdoQjxN45IRMvLlwr39Lcp+H2FAMVndqnw4PT/vRLJqqeTGRbjuXRxxeZ6rZ1jxzzV+em6YnalQDCBXnARvBXePg7UW4tVmEHHg6fMnuqkFAXCn2VmlYWMpzYujToyvAj2wEikc7UsGTsGbHL1+Yce9TXTNVrYA/X9izjKJcL8uWf0L9WDv6pGLAuWS1+w63obsUFdfK46nVIgNQyoOcF2kppD3RpK0LGiPEt2RRCsCKEkjCzLLIVrq7DHtjXV/94ewxmU3LpkOld7rDnNGpkpuNXoPqsrDIsSXWxEpAe6ptSPK0KEt40sygty7/5viVtR/jnOR6vfHvizSjLOkSK4AEjjU0qgcC2fV/f9dftRGtcy0Th/z5TUkt/CHOEXUo8drfdTVvh3xIONUJflnh5drf/wPNs9vfMcDH/oP134n+pgdOT8cKDO9ZQNzVydvBf4XJKK0K2e6PAfKZnouuCw7wi8L2N2KzJi7vhn+9BZe8q11XkZlwqzgOvOGjr1XYryxvd6r4qQhLC98/HEY6c3wHv87Ve9PDUzW9EP8/ErP9fEms0Q5PEHeLOI4qyBu54kiYVqHQ2MAyjnjg6TGunUrDSNw9f34FIvVV4PR7wcuv94eLedtd35FEz0XDycaApt3jNK6uR5+6+iGqyBb+Ngeq62LzGVbiV/0fZLoFZQ9c11k1y0T2EPakBDYI7UtzarKDc0mV/0UqFcjmd8671cCixudlD72HwPUqPgGr3uNxz+1mSidva44wBMonQy61IaBjr6/hw0P3LylGJ3ruRD79Bqe8BJEI6yy75i3QoW2ffArsC3bAaU0OCwB/GaJJC1rUSXj3rMJuBMcmCPHhps2d+fUsSp84MJrZcwMpWF6MxcZVYHKEXRw4n7lQDRtWCiqofIhhPr7wo2VAsHtxKbYgI/MR0Pot3/tED4NvVgW26Znj5V6p3ICHbtMKUQzT1ZWjbrxTDF3ULx2XW86gp2fMu5JWWxlu9ntZiIDdXh4mu7WTzkThua791gqFsd/vtatCE7gFAd1tHpNVsmQs25KtyNo2GR9JP/2v+inp82pPMft1irXmR/lapPJ86f6VziX7358WdTg6dAPF5CYSQaZOh9M6O869T5nbsdeOVqfLFbSJ8+fPvPfw1wiSnOzhKoqbJv+pdwza4SThMQbY3dTaKsRWHhvDyYqudhtxkzG7ayBmsHmZY/mRcL3+S+OkzA9ZL6JUPDLEMMITVgk6+atu7NnRuB/bHZtQbsUcxoq4PGcIf1Yi2h+vUfprWb+z0luNZjTVrH8I1qu65i+Wkmzp8L48EjC8YOLrs+xdfn+/c90ylmWljkgw8zUaRJxRbWTd4bnpwJpl7E9gqEvktIXio8knnto9saTWuPdQXYr5k6U30Jq66Cd4bjJLtb2Q2INlO3U1Pyzmw/oWrVuOiCvrnz84LurbvEijd3FhWuRwN/zBpgzzbMQdsV0lIM2xbt+SxXtNsBsuB2+wjaON3nZOpjGV4Pc+E73W3Ub6BYt7vlDT7/DnukPubpsgArCMRRmS0Jkz8yC31vX2Cc7PhscbdL4rnvq5t8vhNIeMsSzq+R2ZVTP24B5xWUsSQZUH203WAw2i13ObRvcWjM1PoU2d/BC7fZ4CO0+bDOg/x8P11wdhB/HwTU/8SzmAlnqyb/BKRYVPqecCcU2E7sEsGZqVpNhWCyJwrUyOiuv1WSohqh9tv43fDOmWHJvmrnWiFDYfRyFAvTY7/ZbMobnZvchA55JMDQ8vRUjw1vEwTGalXUQbEbfzPsNVzG3JD5KlmuLQjrzUg13VnT8k+cYi/iKDXRRYYfIxaWpmpS3bpC71WjWnmgdhBidoFe60nMrqGO9oUKAj10iGIKRz93MEciTbazOp64yGn3n4YT1laEYDFycdMNcHqE3f/vQTl6PCpi2pmzC9atGG+VUh5d84tAK1x1LtLjREIiJg2DU63lpOBmI2HPYaXhUaZKDkTh/tbRffc/Wm5h1r9p+0i0Yx6l+rpLLvXFF1u2sgZxa8AY5WSwNxiEsq5UCP3azd6FBczjnHEdfbT1lqDO/qwlqfjNrwlaUs3yQc9WBbDU4uI/IZsu0Qb8fE0RZesKqdb30SLjf0OTj6dqMXSi/MbwxHUw2txRrKztTxHL699pKMRBLkSKhL4w2es+ECOEbiD2SDRhqDIbEou3qO2WycQMP3G72Hdi/AyzGFkiiyDd/5lL/hGZnPhvo0BrArHTCsReV+ZSoUwvS2XVpwoy8Wka63R4vQisosn7hqGCVTA2eGwrcEq3Ri5Zf/FkwRAxI7FPGanqdT+6xFDtEQrUgg5sApdnSknIkRQBWqavaA+tlBNGGWPktsh/R0WOFUUk//I2Zwi3F6v2C73Q3VCTZdR13auXYWTqkWgrB8w1xnPxb6ZVhvJK2i3y4iQswebwyOpjWyB4FPN9tlXgqqNqgCUUXObk8Znq+BLnzINCkj/2/a4vyOjq69Pi7HQrEDd5kXNOtLB/zhulA9E5HXDug3t0+dZ9Lu6xgAdajNC0BMN33ynczwXMuIqisAHR2RoP9QTGIAVKqWV+rNB+RaaHKN3gGR/LopMSj1YRj9GN6lkWc3TYgv9yyk4Sb8zNiwCE9e3Vot1Cc7IH/5wSGJLSJ78uQRIxw/GFziWwUxdwueM6RnsrvGqImFmF18jCef+FWDjmXoH4u4FpoPy68qhNepluCV8jyARq4OBj9TLkfKpdHp7skJ8HWtZLhfjggyxUuSVc57k2L9gksK3kZvDCZ6T0qsylhBjLydc5XFu0lqsHo/hPOK92f15IOg3iz/PGAAklH72qJidozQCm6gnIgvbPdkzkrlbISMcQEq20nKxioGNPnia3Lg62/nGmt9R8v6dZLZvp4mG71jkIZa2rItDE5z5rKRTdgrGtzWDd/GPWdghHmw0jHHQmkaEPa7opxEUgB8feVabmouC6Qtk2sd+Q0jw9yeJrYZ5o34XfKyuOxSWST39IjoUpfaWa69+YL1WsArspXoDIhv4Ec+7vdf5YeI7U2JqdEF1Ae8BY7pO3RFfqdkbLyuSmnVTBAfg5c4vG/iNIIlISm51tMmvVlnju5DUY0UPiLiEjXVIGF514VuW+oWi91p2zy0VpseTM2Dw4RgR4MEI4s7bdLODZIkB+BZpJkVTk7heZZCNZip1jiKb/oKzrecHwSP/D+5/sf+bVbQTKodgct3L2PexyBjA0pmZ7ggoInrX97SY1dVFUuaIdDtCgSA53tXIfhjmmJSYrazedDOWsUdzy/uFsXsXGkSms/rBgNzOZbHB/82x2XyhtGhlVru7COuv7U8YmJuMo6zQNcLLhzL8L58p+byeknFYAWmYoU5lYv3Fw7t/gqgDu3VqYG9AiQuHtbIrMIZLEI7eMfy9UqFEM0moa+4GkhUs2fojuazLneV4ETVs4KilxvageLVe4MBm03+uc8yEOVFs8XBvVACHST+Fo60N2qtEhdBd4dlKZdcx7h4MkynOso2CvcQEa9AoW2ZfU9tcl7gwS2Iau0qIAJx0MEQ38VE+pVjIwL3gnECF5RXgU6jMrzkx0CzbE7NodACE7xWEOjBr3PwmOYNIzmWFIHRujVraVD9l70DY3n6+3lUE/0axnNdePKtkjCE5g4/Xz36Pp7XdGNxjgVNyct/sPc2wdHlm2TeBHST3Jz+1Zc5I6m7XqsEog+n8z0bTAAYnXXaP4/+bkD8oqGBLqsVUXdNocRGuxRR+ZwUWTlL3AlnTlm9RuW+ldsySh44MyUACVwgnIwMqDi7YqwI+JA0ZicUoZKWzz8GEh8JOmifZQpXjWQvXOW4my4/6Vodqj2PDyrtEa8+sZEDUj7bmPHxcQMjjjcKxY/fxLeRit9TXgIJPsKC62TZgo1ys5bKw0P6btCOiRRVajxmWJBut/6j9vbX//YKh0XYYYyciNXRwJdQWON2TDa2NMX265oIqt/FT9cGHf/j/koba1E8aXXuLnLx17Ttf5c/9DZe4rQYU8QXKqX5Vir7/0U7a3QYz4bezu3LFwbvjTTjv9wsm+RDZ8wH4GFUmCr7CQP1JNqBtKveR1MY/yL+q2HXbUsMTVvefT1NqEKFSJsdd8JJ1pGiRaZ7ni+OPxvdZjV67O2wz0ns/lZWEhC2jEW8PP4O+aIzEZoWyLot0PPo9cj591BersSH3GE+UFr13Xsg5HiaFRg57vtDPcUgJ1bNmsGsNh8TaS3uYxEVP8fux56ogcMpnryTA5U7nNUm/dYGS+Zo0QpnkMgASvcYdZF3EAgtltmZiN0y7ISHA950koHrZ97xT1a1dSIcP2btq+Bh4iWpvq6mqPLAMXkm1pxwo/iM8ZWFmhtYFoeQY+AdBnmilimX73dCMbQk0W5rFZp2EgUWjfOnMLc57IO3jh/F6/rE2dtWGgowt4FO7khcQYsj/K2f1L7COapshkYS92lEs+TQRgHV448th03IxviidkVlSeFjrxSAAJKbF9BM5b3OmMKk55Ctt++Y2R2yxukmieb3iJ2ovphD9MGsMF+/OesK1rGD/81K7QGMQsJU9b/EMoKrcrjT+kjxALkyKSbVILgDIFNrcO6Gg4z2MzItb+HljkY6ZG3Qooinq6/8ciVjJWrblWmfZacILKWWy+a9iDo2Q9c0AldsXbiM/WArZFY0XB3DTGBniE7JW8THqXKrK9BHQJlf3PyivB7dp3Z+1IzXNWf0Cg5XWUxjunApanl22fpKWxVAH+yt2udJLRqSYDcqa7b6jYxEbyFgizNgz8+uQmR3J3BEqc2Y5gS68FuTx9teMRPoWwX4eGLGd1ErdA2mrtzfD18B5XTYDWpO7Yu/MgxJEMnuCAgzKhZVr815emd/YZwCkJQuYtmtXZQQGetty45ydVofgmUmtpdKHPqWxMZeOwn/ikK1r2CmK7mJX+8mtzIpJkWtEjKwLrDNrtN+ie4jP4i6p+cofS6WQKK+dD0GiAU/S6ScR2z+KdawJrKaVObeAe47mpYSI2OgzvqgiWVDiGiKYm+M1mghjWqr4Akokw0IBedrb6KknpUk43AWZCVYdqRZtuFf9n2d+W6zlLSmg52enF8zfWHUvxrU45WEh/dWLORY+lBuZtmtRkrGpRIFzvgD1DpqGeiCl69J7p3E/y3WQdbgJPD8OAt/EmXF+sYeFXMpVqtwjY2dfqcl+28CrrU/fUajz2fIJ8NZ/AjWNhWfKg6ZCxXb8WbHYhH7wp5LyJ5m8FnrfFMB9fbdycdqEBZbsDZ9I3kGZy5j5bvds58t2E+KyJz5uix7Z+wjI3pBAsQ+xtPX8GKw0IWuM3DbLxxNrgXlc7Ee52PjpNV9OsaR7D31S9ppAcymnq0jjPeb+H7rOMmFfB0WWkRSZwwGkY5FCviIVcYzpLXgJoyqIw8cdHwAWlUEKBMss+8i8MgEcQpZWgiEhYhfJOV+4DAGO65/FnvCPt+qysSEqpuiG/Y6XYMH2+VaP2JeEBMqay1Msv5wt1UIEgF4+Yr4HigLiQ6A94x2u7YKvhFOS6tlJ5Dz870HHnuDnPqswLs83fLwLNTg8BPvIgtUgrJ9bPLhkVaYzueoeRNyLpN4+s0ALg3qRxSDu0iFsZSIgmlhet3vMYn2vKL0RhFdkqZ5KARTceTXCfcb9gm1NfHHZ4etDDKK6dhYwKov5u3S3p5jXO4TtzxK4vtNiLQrdRgtQXHWRNMTYwPNIbDcwVOgX0kwmcvj4VNZg8daJI2cRzUpWHF5N1/iCLk+Z5akr6ReEAeidJnHBoaJcDsROhutzIEFaxbQvhrXG32rmMlbqGOL4SXcA7pe0/FRAQ/q5Ensc7wlGAsqpcd5vAi4oT+uZ/i2L5+XArKPnYTwJuIrj+7aZoVEZYZwNeL/qRUHxWkgTHbY8WCAV2HpiceeCq9wih1AaXdKM7FElpt3EH7udJ8c3JmjEC/K5v2x6pEEGuJx3nvfjAvOG0BIh13WShtoHHR3OZPIWjkBgsNaCY/ONvMNjDYCdghIC0boY+1jSMMsHnSyivQumiYirlE6hShoPGplO6gv3nCysUa8OY/YOuxEUuAntvgmJ8cHdedcSssbfjdXJdD1Hy5x4dmwqcgWmytGNWlIbTkh/AovtphNyODs2YY//wIf0fnuDLj9jwU6lkBoin4MKU4sXuTc9tMJwyGW5+9TZsmmCt6g3IVhzcx/9/3Zg9whuwztrHnMaX2szKI/IML/sd5RYz4lkfRXk24chQ5BrF4uPC2N+QCU0wrd+SfN7y7KfuEmHwcldZp2rLGwPg1ArN6Yfyg+vNzZpaNmMu/OjJBueIjTnpDH0iymhWQghJ5E/8AASaFz/ylzgf0+JhEvMew5ZgE63eNZDQLZSrBJMtxop2CHDAeJLZexejzkoR8qw4oUgCFTi0F76S7zrxgRzXuvupdKi9YKZxrwUCucBdMtBvoRJZWDCNqtO0lwYZEoL1x/k+YknLK2ZMmxhxCLwIDja1/K8PU0Rvj4R+st1rPiMOjXifmmKgK/Pw84t95t0gEI4yS5vd+R5rV/bwkiSAwT4369kL3ziu65aaJJ/eaVzSXnz231h5ITqz5NefUvluwwWEm9Um9J5XNad4zJnDWoKch08xPAHuyxXXNsMW+bPqicKDVhB2ClJNYmUpFjImNJA0ncAu82aSQPTXPdD04HsrSeb65oZRoHa2t0i768Wc6a+Xy8zWqfeByR/vudW7m3m98trsYTlzGEK93zz7Y/BIJ7SpGnUQ/avYdjd+TAdOdHqlG94u7HhUJ4VttmrVzTMdtMBvd3UWLM0gxvlTgzJATpalSkWa7BH9oQS488yuCytb8y33P7XZ6ou3gqg/I9Rst6zKIDcx1En9KK2HZVR7Q/hLlFGSUvXbBan3seMb1zakoNzCLe4uG+6r54Df0qAbjtb/Zb6mSBxy2PK3qrrkLHX7zZKnbZ/nfsIuU0TczlHFqoDDk1s2rz6vpxOPg8IxU2DL5fE9Eg1UqGew/niboVBdq95sUWjvtOgO+o0R8bn4MprjGiDX9wSM8IRrC7oEo7JRn0P32CGD5aAW0XaVX/kjqU2wdwyJp+UZuMWaE/TcotgUCGmLnmAlS20orsqsIG52bdZFczk32jLSF+wsyEqTomiew5KLlcBwDRaERg/9Vd5AB7Nle+T73gL02Fz5O+eoj6gzkwDb2b371rM4HVoI28A2qaiaSnonozLUTWlfBoXgCc5qhL75SrHHqGy5SNhNPj1+iD65/NqZq2CgfuQxmsMQiPXtC6TM5eDQgMIiQZAs+uM24pk7JKpEsrHT58NREpXYw3ZKMrmPtWGtkepzg8YDEVmB6GX3yYu1JusTfcvNo3ZzqNMnex7EppXnMnKQ9z6TfzI0jNwggGHjv0OhxmbgzEPwcpY97okxp3KnewfoG4tKNmyc4Vs8iM0Zfnn6za7mcd3L5rPEtMH5Z6BTL166r0/bpMRTKNKkTcRQS2xOQAbFFgCYzb+U78Tq3NhNo1HzYxIclBz1xYpILsWhRG70VQP9Ar60zVCgMZvGhE61szs0YMkldlE4q9eM/jQg2BjnnbYGqw+bR/gwd6ylus9H3ytlIilzvPCqtPKa4ylw1SMywAAA=" alt="" width="220" height="200"><span class="nm">Жасулан</span><span class="wave"><b></b><b></b><b></b><b></b><b></b></span></div>
+          <div class="tile tcl"><span class="ini">АС</span><span class="nm">Клиент · салон</span></div>
+        </div>
+        <div class="notes"><b>Заметки к ТЗ</b><ul><li>Запись на 3 услуги</li><li>Предоплата через Kaspi</li><li>Напоминание за 2 часа</li></ul></div>
+        <div class="ctrls"><i><svg viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></i><i><svg viewBox="0 0 24 24"><rect x="3" y="6" width="13" height="12" rx="2"/><path d="M16 10l5-3v10l-5-3"/></svg></i><i class="end"><svg viewBox="0 0 24 24"><path d="M3 14c5-5 13-5 18 0l-3 3-3-2v-3a10 10 0 0 0-6 0v3l-3 2z"/></svg></i></div>
+      </div></div><div class="jr-txt rv" style="--d:.15s"><span class="jr-n">Шаг 2</span><h3>Созвон</h3><p>Задаю вопросы и разбираюсь в задаче. Если ТЗ нет, пишу его сам.</p><span class="cap">15–30 минут</span></div></li>
       <li class="jr-link" aria-hidden="true"><svg viewBox="0 0 680 120" preserveAspectRatio="none"><path class="draw" pathLength="1" d="M560 10 C 560 90, 120 30, 120 110" fill="none" stroke="#0B0B0C" stroke-width="4" stroke-dasharray="1" stroke-linecap="round"/></svg></li>
-      <li class="jr l"><div class="jr-art panel rv slam" style="--r:-1.5deg"><svg viewBox="0 0 360 260"><g transform="rotate(4 180 130)"><rect x="96" y="22" width="170" height="226" fill="#fff" stroke="#0B0B0C" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/><rect x="136" y="8" width="90" height="30" fill="#FF4A0A" stroke="#0B0B0C" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/><text x="118" y="78" font-family="Unbounded,sans-serif" font-weight="900" font-size="24" fill="#0B0B0C">КП</text><text x="118" y="108" font-family="Onest,sans-serif" font-weight="700" font-size="15" fill="#0B0B0C">что делаем</text><path d="M118 120h120M118 134h90" stroke="#0B0B0C" stroke-width="3"/><text x="118" y="172" font-family="Onest,sans-serif" font-weight="800" font-size="17" fill="#0B0B0C">сроки</text><text x="118" y="200" font-family="Onest,sans-serif" font-weight="800" font-size="17" fill="#0B0B0C">стоимость</text><path class="draw circle" pathLength="1" d="M98 172c8-32 134-38 160-10c24 26-10 52-80 52c-64 0-98-16-84-40" fill="none" stroke="#FF4A0A" stroke-width="5" stroke-linecap="round"/></g></svg></div><div class="jr-txt rv" style="--d:.15s"><span class="jr-n">Шаг 3</span><h3>Предложение</h3><p>Что делаем, <span class="hl">сроки и стоимость</span> — до начала работы. Старт после предоплаты 50%.</p><span class="cap">без сюрпризов</span></div></li>
+      <li class="jr l"><div class="jr-art panel rv slam" style="--r:-1.5deg"><div class="mk mk-doc" aria-hidden="true">
+        <div class="doc">
+          <div class="doc-h"><b>Коммерческое предложение</b><small>Студия «Лён» · пример</small></div>
+          <div class="row r1"><span>Лендинг салона</span><b>50 000 ₸</b></div>
+          <div class="row r2"><span>Онлайн-запись и напоминания</span><b>60 000 ₸</b></div>
+          <div class="row r3"><span>Срок</span><b>7 дней</b></div>
+          <div class="row tot r4"><span>Итого</span><b>110 000 ₸</b></div>
+          <div class="doc-pay r5">Предоплата 50% — 55 000 ₸</div>
+          <span class="okstamp">Согласовано</span>
+        </div>
+      </div></div><div class="jr-txt rv" style="--d:.15s"><span class="jr-n">Шаг 3</span><h3>Предложение</h3><p>Что делаем, <span class="hl">сроки и стоимость</span> — до начала работы. Старт после предоплаты 50%.</p><span class="cap">без сюрпризов</span></div></li>
       <li class="jr-link" aria-hidden="true"><svg viewBox="0 0 680 120" preserveAspectRatio="none"><path class="draw" pathLength="1" d="M120 10 C 120 90, 560 30, 560 110" fill="none" stroke="#0B0B0C" stroke-width="4" stroke-dasharray="1" stroke-linecap="round"/></svg></li>
-      <li class="jr r"><div class="jr-art panel rv slam" style="--r:1.5deg"><svg viewBox="0 0 360 260"><rect x="40" y="30" width="280" height="190" fill="#fff" stroke="#0B0B0C" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/><path d="M40 62h280" stroke="#0B0B0C" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/><circle cx="62" cy="46" r="6" fill="#FF4A0A"/><circle cx="82" cy="46" r="6" fill="#FFD84A"/><circle cx="102" cy="46" r="6" fill="#38C46A"/><rect x="62" y="82" width="120" height="70" fill="#FFE3D6" stroke="#0B0B0C" stroke-width="4"/><path d="M200 90h96M200 110h70M200 130h86" stroke="#0B0B0C" stroke-width="4" stroke-linecap="round"/><rect x="62" y="172" width="236" height="20" fill="#fff" stroke="#0B0B0C" stroke-width="4"/><rect class="grow" x="64" y="174" width="232" height="16" fill="#FF4A0A"/><text x="180" y="248" text-anchor="middle" font-family="Onest,sans-serif" font-weight="800" font-size="15" fill="#0B0B0C">показываю каждые 2–3 дня</text></svg></div><div class="jr-txt rv" style="--d:.15s"><span class="jr-n">Шаг 4</span><h3>Работа</h3><p>Показываю результат каждые 2–3 дня, правки вносим по ходу.</p><span class="cap">вы видите прогресс</span></div></li>
+      <li class="jr r"><div class="jr-art panel rv slam" style="--r:1.5deg"><div class="mk mk-web" aria-hidden="true">
+        <div class="win">
+          <div class="win-bar"><i></i><i></i><i></i><span>ваш-сайт.kz</span></div>
+          <div class="site">
+            <div class="s-nav"><b>Лён</b><span>Услуги</span><span>Цены</span><span>Контакты</span></div>
+            <div class="s-hero"><div class="s-copy"><h5>Стрижки и маникюр рядом с домом</h5><p>Запишитесь онлайн за минуту</p><em>Записаться</em></div><img class="s-pic" src="data:image/webp;base64,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" alt="" width="220" height="220"></div>
+            <div class="s-cards"><div>Стрижка<b>8 000 ₸</b></div><div>Маникюр<b>7 000 ₸</b></div><div>Окрашивание<b>20 000 ₸</b></div></div>
+          </div>
+          <span class="pin">Кнопку крупнее ✓</span>
+        </div>
+        <div class="bld"><span>Готово</span><div class="bar"><i class="grow"></i></div><b class="pct">0%</b></div>
+      </div></div><div class="jr-txt rv" style="--d:.15s"><span class="jr-n">Шаг 4</span><h3>Работа</h3><p>Показываю результат каждые 2–3 дня, правки вносим по ходу.</p><span class="cap">вы видите прогресс</span></div></li>
       <li class="jr-link" aria-hidden="true"><svg viewBox="0 0 680 120" preserveAspectRatio="none"><path class="draw" pathLength="1" d="M560 10 C 560 90, 120 30, 120 110" fill="none" stroke="#0B0B0C" stroke-width="4" stroke-dasharray="1" stroke-linecap="round"/></svg></li>
-      <li class="jr l"><div class="jr-art panel rv slam" style="--r:-1.5deg"><svg viewBox="0 0 360 260"><g class="spin"><path d="M180 20l14 40 40-20-14 42 44 6-38 24 30 32-44-6 4 44-36-26-36 26 4-44-44 6 30-32-38-24 44-6-14-42 40 20z" fill="#FFD84A" stroke="#0B0B0C" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/></g><text x="180" y="138" text-anchor="middle" font-family="Unbounded,sans-serif" font-weight="900" font-size="19" fill="#0B0B0C">ЗАПУСК!</text><g class="slide"><rect x="56" y="186" width="248" height="58" fill="#fff" stroke="#0B0B0C" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/><circle cx="86" cy="215" r="16" fill="#38C46A" stroke="#0B0B0C" stroke-width="4"/><path d="M78 215l6 6 11-12" stroke="#0B0B0C" stroke-width="4" fill="none"/><text x="112" y="211" font-family="Onest,sans-serif" font-weight="800" font-size="15" fill="#0B0B0C">Новая запись</text><text x="112" y="231" font-family="Onest,sans-serif" font-weight="600" font-size="13" fill="#4A4540">14:05 · оплата получена</text></g></svg></div><div class="jr-txt rv" style="--d:.15s"><span class="jr-n">Шаг 5</span><h3>Запуск</h3><p>Передаю код, доступы и инструкцию. 14 дней исправляю ошибки за свой счёт.</p><span class="cap">заявки идут</span></div></li>
+      <li class="jr l"><div class="jr-art panel rv slam" style="--r:-1.5deg"><div class="mk mk-ntf" aria-hidden="true">
+        <div class="lock">
+          <div class="clock">14:05</div><div class="date">уведомления владельцу</div>
+          <div class="nt n1"><i class="ic-g"><svg viewBox="0 0 24 24" width="16" height="16"><path d="M5 12l5 5 9-10" fill="none" stroke="#0B0B0C" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/></svg></i><div><b>Новая запись</b><span>Маникюр · завтра в 14:30</span></div><small>сейчас</small></div>
+          <div class="nt n2"><i class="ic-o">₸</i><div><b>Оплата получена</b><span>Предоплата 2 000 ₸</span></div><small>сейчас</small></div>
+          <div class="nt n3"><i class="ic-y"><svg viewBox="0 0 24 24" width="16" height="16"><path d="M6 17h12l-2-3v-4a4 4 0 0 0-8 0v4zM10 20h4" fill="none" stroke="#0B0B0C" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></i><div><b>Напоминание отправлено</b><span>Клиенту за 2 часа до визита</span></div><small>1 мин</small></div>
+        </div>
+        <span class="boom"><svg viewBox="0 0 120 120"><path d="M60 4l10 30 30-14-12 30 30 8-28 16 20 26-32-6 2 32-20-24-20 24 2-32-32 6 20-26-28-16 30-8-12-30 30 14z" fill="#FFD84A" stroke="#0B0B0C" stroke-width="4" stroke-linejoin="round"/></svg><span>Запуск!</span></span>
+      </div></div><div class="jr-txt rv" style="--d:.15s"><span class="jr-n">Шаг 5</span><h3>Запуск</h3><p>Передаю код, доступы и инструкцию. 14 дней исправляю ошибки за свой счёт.</p><span class="cap">заявки идут</span></div></li>
     </ol>
     <button class="btn w sm" id="replayJ" type="button" style="margin-top:28px">Повторить анимацию</button>
   </div>
@@ -615,12 +821,12 @@ h1,h2,h3{font-weight:400;letter-spacing:0}
   var c1=document.getElementById('c1'),c2=document.getElementById('c2'),c3=document.getElementById('c3'),sum=document.getElementById('sum');
   var fmt=function(n){return Math.round(n).toLocaleString('ru-RU').replace(/ /g,' ')+' ₸'};
   function calc(){document.getElementById('o1').textContent=c1.value;document.getElementById('o2').textContent=c2.value+'%';document.getElementById('o3').textContent=fmt(+c3.value);
-    sum.textContent=fmt(c1.value*4.3*(c2.value/100)*c3.value)}
+    sum.textContent=fmt(c1.value*4.3*(c2.value/100)*c3.value);sum.classList.remove('bump');void sum.offsetWidth;sum.classList.add('bump')}
   [c1,c2,c3].forEach(function(i){i.addEventListener('input',calc)});calc();
   // demo chat
   var chat=document.getElementById('chat'),kb=document.getElementById('kb'),notif=document.getElementById('notif'),busy=false;
   function add(t,c){var d=document.createElement('div');d.className='ph-msg '+c;d.textContent=t;chat.appendChild(d);chat.scrollTop=chat.scrollHeight}
-  function keys(list){kb.innerHTML='';list.forEach(function(k){var b=document.createElement('button');b.type='button';b.textContent=k[0];b.addEventListener('click',function(){if(busy)return;busy=true;add(k[0],'me');kb.innerHTML='';setTimeout(function(){busy=false;k[1]()},550)});kb.appendChild(b)})}
+  function keys(list){kb.innerHTML='';list.forEach(function(k){var b=document.createElement('button');b.type='button';b.textContent=k[0];b.addEventListener('click',function(){if(busy)return;busy=true;add(k[0],'me');kb.innerHTML='';var ty=document.createElement('div');ty.className='ph-msg typing';ty.innerHTML='<i></i><i></i><i></i>';setTimeout(function(){chat.appendChild(ty);chat.scrollTop=chat.scrollHeight},250);setTimeout(function(){ty.remove();busy=false;k[1]()},1000)});kb.appendChild(b)})}
   function start(){chat.innerHTML='';notif.classList.remove('show');add('Здравствуйте! Я помогу записаться к мастеру. Что вас интересует?','bot');keys([['Стрижка',function(){svc('Стрижка','8 000 ₸')}],['Маникюр',function(){svc('Маникюр','7 000 ₸')}],['Окрашивание',function(){svc('Окрашивание','20 000 ₸')}]])}
   function svc(n,p){add(n+' — '+p+'. Выберите удобное время на завтра:','bot');keys([['10:00',function(){time(n,'10:00')}],['14:30',function(){time(n,'14:30')}],['18:00',function(){time(n,'18:00')}]])}
   function time(n,t){add('Отлично: '+n+', завтра в '+t+'. Чтобы закрепить время, внесите предоплату 2 000 ₸ через Kaspi.','bot');keys([['Оплатить 2 000 ₸',function(){pay(n,t)}]])}
@@ -663,6 +869,19 @@ h1,h2,h3{font-weight:400;letter-spacing:0}
   if('IntersectionObserver' in window){var lo=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('on');lo.unobserve(e.target)}})},{threshold:.6});links.forEach(function(l){lo.observe(l)})}else links.forEach(function(l){l.classList.add('on')});
   document.getElementById('replayJ').addEventListener('click',function(){var j=document.getElementById('journey');var items=j.querySelectorAll('.rv,.jr-link');items.forEach(function(e){e.classList.remove('in','on')});j.scrollIntoView({behavior:'smooth',block:'start'});var k=0;items.forEach(function(e){setTimeout(function(){e.classList.add(e.classList.contains('jr-link')?'on':'in')},500+k*260);k++})});
   var gl=document.getElementById('glow');if(matchMedia('(pointer:fine)').matches){addEventListener('pointermove',function(e){gl.style.transform='translate('+e.clientX+'px,'+e.clientY+'px)'},{passive:true})}
+
+  // v2: count-up numbers in guarantees
+  (function(){var red=matchMedia('(prefers-reduced-motion: reduce)').matches;
+    document.querySelectorAll('.g .n').forEach(function(n){var m=n.textContent.match(/^(\d+)(%?)$/);if(!m||red)return;var to=+m[1],suf=m[2];n.textContent='0'+suf;
+      var o=new IntersectionObserver(function(es){if(!es[0].isIntersecting)return;o.disconnect();var t0=performance.now();
+        (function step(t){var k=Math.min(1,(t-t0)/1100),e=1-Math.pow(1-k,3);n.textContent=Math.round(to*e)+suf;if(k<1)requestAnimationFrame(step)})(t0)},{threshold:.6});o.observe(n)})})();
+  // v2: step mockups — call timer and build progress
+  (function(){var red=matchMedia('(prefers-reduced-motion: reduce)').matches;
+    function run(art){var ct=art.querySelector('.ctime'),pc=art.querySelector('.pct');
+      if(ct){clearInterval(art._t);var s=red?754:0;ct.textContent='00:00';art._t=setInterval(function(){s++;ct.textContent=('0'+Math.floor(s/60)).slice(-2)+':'+('0'+s%60).slice(-2)},1000)}
+      if(pc){var t0=performance.now()+400,D=1600;if(red){pc.textContent='100%';return}pc.textContent='0%';
+        (function step(t){var k=Math.max(0,Math.min(1,(t-t0)/D));pc.textContent=Math.round(k*100)+'%';if(k<1)requestAnimationFrame(step)})(performance.now())}}
+    document.querySelectorAll('.jr-art').forEach(function(a){var was=false;new MutationObserver(function(){var on=a.classList.contains('in');if(on&&!was)run(a);was=on}).observe(a,{attributes:true,attributeFilter:['class']})})})();
 
 })();
 </script>
