@@ -529,6 +529,7 @@ html.js .sec-head h2.in em{animation:emPop .55s .35s cubic-bezier(.2,1.6,.4,1) b
 .ag-flow li.now{color:var(--orange)}
 .ag-flow li:not(.done):not(.now){opacity:.45}
 .ag-copy{display:flex;flex-direction:column;gap:22px}
+.ag-copy .ag-ex{align-self:flex-start;margin-bottom:-8px}
 .ag-cards{display:grid;grid-template-columns:minmax(0,1fr);gap:14px}
 .ag-c{padding:14px 16px;box-shadow:6px 6px 0 var(--ink);display:grid;grid-template-columns:150px 1fr;gap:12px;align-items:start}
 .ag-c b{display:block;font:400 17px var(--display);padding-top:2px}
@@ -666,7 +667,7 @@ html.js .ag-parts.in .chips span:nth-child(2){animation-delay:.12s}html.js .ag-p
     <div class="sec-head">
       <span class="pageno">Страница 3 · ИИ-агенты</span>
       <h2 class="rv">Подключаю <em>ИИ-агентов</em> для бизнеса</h2>
-      <p class="rv">Чат только отвечает, а агент ещё и делает. Это ИИ-сотрудник: отвечает клиентам, записывает, отправляет ссылку на оплату и напоминает о визите, а сложные вопросы передаёт вам.</p>
+      <p class="rv">Чат только отвечает, а агент ещё и делает. Это ИИ-сотрудник: отвечает клиентам, записывает, отправляет ссылку на оплату и напоминает о визите, а сложные вопросы передаёт вам. Подключаю агентов в любой бизнес: магазин, салон, клинику, доставку, школу, сервис. Ниже только примеры.</p>
     </div>
     <div class="ag">
       <div class="ag-art panel rv slam" style="--r:-1deg" aria-hidden="true">
@@ -685,10 +686,11 @@ html.js .ag-parts.in .chips span:nth-child(2){animation-delay:.12s}html.js .ag-p
         </div>
       </div>
       <div class="ag-copy">
+        <span class="cap ag-ex">Например</span>
         <div class="ag-cards">
           <div class="panel ag-c rv"><b>Стоматология</b><ul><li>Отвечает про цены и свободное время</li><li>Записывает, переносит и напоминает о приёме</li><li>При боли и жалобах зовёт администратора</li></ul></div>
           <div class="panel ag-c rv" style="--d:.1s"><b>Автосервис</b><ul><li>Принимает заявку: марка, проблема, удобное время</li><li>Сообщает клиенту, что машина готова</li><li>Напоминает о замене масла и ТО</li></ul></div>
-          <div class="panel ag-c rv" style="--d:.2s"><b>Любой бизнес</b><ul><li>Отвечает в WhatsApp и Instagram</li><li>Собирает заявки в одну таблицу</li><li>Утром присылает владельцу сводку</li></ul></div>
+          <div class="panel ag-c rv" style="--d:.2s"><b>Ваш бизнес</b><ul><li>Отвечает клиентам в WhatsApp и Instagram</li><li>Собирает заявки и заказы в одну таблицу или CRM</li><li>Утром присылает владельцу сводку</li><li>Опишите свою рутину — соберу агента под неё</li></ul></div>
         </div>
         <div class="ag-parts rv"><span class="cap">Из чего собран агент</span>
           <div class="chips"><span><b>Мозг</b> нейросеть Claude</span><span><b>Инструкция</b> как отвечать и что можно</span><span><b>Знания</b> прайс, адрес, график</span><span><b>Инструменты</b> запись, мессенджеры, Kaspi</span><span><b>Человек</b> сложное передаёт вам</span></div>
