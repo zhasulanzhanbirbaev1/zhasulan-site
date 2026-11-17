@@ -651,6 +651,21 @@ html.js .sol.vis .mu-r:nth-of-type(2){animation-delay:.3s}html.js .sol.vis .mu-r
 .mv-bar{height:8px;border:2px solid var(--ink);background:#fff}.mv-bar b{display:block;height:100%;width:40%;background:var(--orange);animation:mvb 3s linear infinite}
 @keyframes mvb{to{width:100%}}
 @media (prefers-reduced-motion:reduce){.mv-bar b{animation:none}}
+
+/* mini cards colors */
+.more .mini{--rot:0deg}
+.more .mini:nth-child(1){background:var(--peach);rotate:-.8deg}
+.more .mini:nth-child(2){background:var(--sun);rotate:.7deg}
+.more .mini:nth-child(3){background:var(--card);rotate:-.5deg}
+.more .mini:nth-child(4){background:var(--orange);rotate:.8deg}
+.more .mini:nth-child(5){background:var(--ink);color:var(--paper);rotate:-.7deg}
+.more .mini:nth-child(6){background:#D6EEDC;rotate:.5deg}
+.more .mini:nth-child(2) span,.more .mini:nth-child(4) span,.more .mini:nth-child(2) i small,.more .mini:nth-child(4) i small,.more .mini:nth-child(1) span{color:var(--ink)}
+.more .mini:nth-child(5) b,.more .mini:nth-child(5) i{color:var(--paper)}.more .mini:nth-child(5) span,.more .mini:nth-child(5) i small{color:#CFC8D6}
+.more .mini:nth-child(4) .more-l{color:var(--ink);-webkit-text-stroke:0}
+.more .mini:nth-child(5) .more-l{color:var(--sun);-webkit-text-stroke:0}
+.more .mini:hover{rotate:0deg}
+@media (prefers-reduced-motion:reduce){.more .mini{rotate:0deg!important}}
 </style>
 <script>document.documentElement.classList.add('js')</script>
 </head>
