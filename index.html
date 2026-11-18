@@ -667,21 +667,28 @@ html.js .sol.vis .mu-r:nth-of-type(2){animation-delay:.3s}html.js .sol.vis .mu-r
 .more .mini:hover{rotate:0deg}
 @media (prefers-reduced-motion:reduce){.more .mini{rotate:0deg!important}}
 /* ===== v2: слой Адай (монета + купюры) + общие доработки ===== */
-#fall{position:fixed;inset:0;z-index:2;pointer-events:none;overflow:hidden}
-#fall i{position:absolute;left:0;top:0;width:128px;height:60px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-style:normal}
-#fall i::before{content:"";position:absolute;inset:0;background:repeating-radial-gradient(circle at 78% 50%,rgba(255,255,255,.2) 0 2px,transparent 2px 7px)}
-#fall i u{display:block;width:40px;height:40px;position:relative;background:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 40 40%22%3E%3Cpath d=%22M8 9H32M8 17H32M20 9V33%22 fill=%22none%22 stroke=%22%232E1A3B%22 stroke-width=%229%22 stroke-linejoin=%22round%22/%3E%3Cpath d=%22M8 9H32M8 17H32M20 9V33%22 fill=%22none%22 stroke=%22%23FFD84A%22 stroke-width=%224.5%22/%3E%3C/svg%3E") center/contain no-repeat;font-size:0}
-#fall .c3{position:absolute;left:0;top:0;width:var(--cs,150px);height:var(--cs,150px);transform-style:preserve-3d;will-change:transform;opacity:.6}
-#fall .c3 s{position:absolute;inset:0;border-radius:50%}
-#fall .c3 s:first-child,#fall .c3 s:last-child{font-size:0}
+#fall{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+#fall .c3{position:absolute;left:0;top:0;width:var(--cs,150px);height:var(--cs,150px);transform-style:preserve-3d;will-change:transform;opacity:.85}
 #fall .c3 s:first-child{transform:rotateY(180deg)}
 main,header,footer{position:relative;z-index:1}
 
 /* вариант A: светлый комикс — купюры и монета с чёрным контуром */
-#fall i{background:linear-gradient(135deg,#FF6B4A,#FF4A0A 60%,#C93A05);border:3px solid #2E1A3B;box-shadow:4px 4px 0 #2E1A3B;color:#2E1A3B}
-#fall .c3 s{background:radial-gradient(circle at 35% 30%,#FFE98A,#FFD84A 55%,#E5A800);box-shadow:inset 0 0 0 4px #2E1A3B,inset 0 0 0 12px rgba(46,26,59,.18)}
-#fall .c3 s:first-child,#fall .c3 s:last-child{background:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 40 40%22%3E%3Cpath d=%22M8 9H32M8 17H32M20 9V33%22 fill=%22none%22 stroke=%22%232E1A3B%22 stroke-width=%229%22 stroke-linejoin=%22round%22/%3E%3Cpath d=%22M8 9H32M8 17H32M20 9V33%22 fill=%22none%22 stroke=%22%23FF4A0A%22 stroke-width=%224.5%22/%3E%3C/svg%3E") center/58% no-repeat,radial-gradient(circle at 35% 30%,#FFE98A,#FFD84A 55%,#E5A800)}
 
+
+/* купюры: рамка, узор-гильош, медальон с ₸, номинал в углу */
+#fall i{position:absolute;left:0;top:0;width:150px;height:70px;border-radius:5px;border:2px solid #2E1A3B;box-shadow:3px 3px 0 #2E1A3B;overflow:hidden;font-style:normal;display:block;
+ background:repeating-radial-gradient(circle at 50% 50%,rgba(255,255,255,.22) 0 1.5px,transparent 1.5px 6px),linear-gradient(135deg,var(--b1),var(--b2))}
+#fall i.c0{--b1:#FF8A5C;--b2:#E8470F}#fall i.c1{--b1:#9FDDB4;--b2:#4FAE78}#fall i.c2{--b1:#FFE27A;--b2:#E9B72C}
+#fall i::before{content:"";position:absolute;inset:4px;border:1.5px solid rgba(46,26,59,.6);border-radius:3px;background:repeating-linear-gradient(90deg,rgba(46,26,59,.18) 0 1px,transparent 1px 4px) right 6px center/34px 32px no-repeat}
+#fall i::after{content:attr(data-v);position:absolute;left:9px;bottom:6px;font:700 11px/1 Arial,sans-serif;color:#2E1A3B}
+#fall i u{position:absolute;left:50%;top:50%;width:38px;height:38px;margin:-19px 0 0 -19px;border-radius:50%;border:1.5px solid #2E1A3B;background:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 40 40%22%3E%3Cpath d=%22M7 8H33M7 15H33M20 8V34%22 fill=%22none%22 stroke=%22rgba%28255%2C255%2C255%2C.55%29%22 stroke-width=%223.2%22 transform=%22translate%28.9 .9%29%22/%3E%3Cpath d=%22M7 8H33M7 15H33M20 8V34%22 fill=%22none%22 stroke=%22%232E1A3B%22 stroke-width=%223.2%22/%3E%3C/svg%3E") center/70% no-repeat,radial-gradient(circle,rgba(255,255,255,.75),rgba(255,255,255,.35));font-size:0;text-decoration:none}
+#fall .c3 s{position:absolute;inset:0;border-radius:50%;display:block}
+/* копейка: золотая грань, кольцо, тонкий ₸ с тиснением */
+#fall .c3 s{background:radial-gradient(circle at 35% 30%,#FFF0A8,#F2C94C 52%,#C58F10);box-shadow:inset 0 0 0 3px #7A4A00,inset 0 0 0 9px rgba(255,255,255,.28),inset 0 0 0 11px rgba(122,74,0,.35)}
+#fall .c3 s:first-child,#fall .c3 s:last-child{font-size:0;background:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 40 40%22%3E%3Cpath d=%22M7 8H33M7 15H33M20 8V34%22 fill=%22none%22 stroke=%22%23FFF1B0%22 stroke-width=%223.2%22 transform=%22translate%28.9 .9%29%22/%3E%3Cpath d=%22M7 8H33M7 15H33M20 8V34%22 fill=%22none%22 stroke=%22%237A4A00%22 stroke-width=%223.2%22/%3E%3C/svg%3E") center/52% no-repeat,radial-gradient(circle at 35% 30%,#FFF0A8,#F2C94C 52%,#C58F10)}
+/* три главные карточки услуг — разные цвета */
+.svc>.card:nth-child(1){background:#D6EEDC}
+.svc>.card:nth-child(3){background:var(--peach)}
 </style>
 <script>document.documentElement.classList.add('js')</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"ProfessionalService","name":"Жасулан — сайты и онлайн-запись для бизнеса","areaServed":"KZ","address":{"@type":"PostalAddress","addressLocality":"Астана","addressCountry":"KZ"},"description":"Сайты, онлайн-запись, автоответы клиентам и оплата через Kaspi для малого бизнеса","sameAs":["https://instagram.com/zhasulan.zhanbirbaev","https://t.me/ZhasulanZhanbirbaev"],"priceRange":"от 50 000 ₸"}</script>
