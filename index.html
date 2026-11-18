@@ -666,23 +666,21 @@ html.js .sol.vis .mu-r:nth-of-type(2){animation-delay:.3s}html.js .sol.vis .mu-r
 .more .mini:nth-child(5) .more-l{color:var(--sun);-webkit-text-stroke:0}
 .more .mini:hover{rotate:0deg}
 @media (prefers-reduced-motion:reduce){.more .mini{rotate:0deg!important}}
-@media (max-width:760px){
 /* ===== v2: слой Адай (монета + купюры) + общие доработки ===== */
-#fall{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+#fall{position:fixed;inset:0;z-index:2;pointer-events:none;overflow:hidden}
 #fall i{position:absolute;left:0;top:0;width:128px;height:60px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-style:normal}
 #fall i::before{content:"";position:absolute;inset:0;background:repeating-radial-gradient(circle at 78% 50%,rgba(255,255,255,.2) 0 2px,transparent 2px 7px)}
-#fall i u{text-decoration:none;font:900 30px var(--display);position:relative}
-#fall .c3{position:absolute;left:0;top:0;width:var(--cs,150px);height:var(--cs,150px);transform-style:preserve-3d;will-change:transform;opacity:.55}
+#fall i u{display:block;width:40px;height:40px;position:relative;background:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 40 40%22%3E%3Cpath d=%22M8 9H32M8 17H32M20 9V33%22 fill=%22none%22 stroke=%22%232E1A3B%22 stroke-width=%229%22 stroke-linejoin=%22round%22/%3E%3Cpath d=%22M8 9H32M8 17H32M20 9V33%22 fill=%22none%22 stroke=%22%23FFD84A%22 stroke-width=%224.5%22/%3E%3C/svg%3E") center/contain no-repeat;font-size:0}
+#fall .c3{position:absolute;left:0;top:0;width:var(--cs,150px);height:var(--cs,150px);transform-style:preserve-3d;will-change:transform;opacity:.6}
 #fall .c3 s{position:absolute;inset:0;border-radius:50%}
-#fall .c3 s:first-child,#fall .c3 s:last-child{display:grid;place-items:center;font:900 calc(var(--cs,150px)*.55)/1 var(--display);text-decoration:none}
+#fall .c3 s:first-child,#fall .c3 s:last-child{font-size:0}
 #fall .c3 s:first-child{transform:rotateY(180deg)}
 main,header,footer{position:relative;z-index:1}
 
 /* вариант A: светлый комикс — купюры и монета с чёрным контуром */
 #fall i{background:linear-gradient(135deg,#FF6B4A,#FF4A0A 60%,#C93A05);border:3px solid #2E1A3B;box-shadow:4px 4px 0 #2E1A3B;color:#2E1A3B}
-#fall i u{color:#FFD84A;-webkit-text-stroke:1.5px #2E1A3B;paint-order:stroke fill}
 #fall .c3 s{background:radial-gradient(circle at 35% 30%,#FFE98A,#FFD84A 55%,#E5A800);box-shadow:inset 0 0 0 4px #2E1A3B,inset 0 0 0 12px rgba(46,26,59,.18)}
-#fall .c3 s:first-child,#fall .c3 s:last-child{color:#FF4A0A;-webkit-text-stroke:3px #2E1A3B;paint-order:stroke fill}
+#fall .c3 s:first-child,#fall .c3 s:last-child{background:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 40 40%22%3E%3Cpath d=%22M8 9H32M8 17H32M20 9V33%22 fill=%22none%22 stroke=%22%232E1A3B%22 stroke-width=%229%22 stroke-linejoin=%22round%22/%3E%3Cpath d=%22M8 9H32M8 17H32M20 9V33%22 fill=%22none%22 stroke=%22%23FF4A0A%22 stroke-width=%224.5%22/%3E%3C/svg%3E") center/58% no-repeat,radial-gradient(circle at 35% 30%,#FFE98A,#FFD84A 55%,#E5A800)}
 
 </style>
 <script>document.documentElement.classList.add('js')</script>
@@ -1173,7 +1171,7 @@ main,header,footer{position:relative;z-index:1}
 <script>
 (function(){
 var f=document.getElementById('fall');if(!f)return;
-if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+var RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
 var M=innerWidth<700,N=M?8:12,items=[],vh0=innerHeight;
 for(var i=0;i<N;i++){var d=Math.random(),e=document.createElement('i');e.innerHTML='<u>\\u20b8</u>';f.appendChild(e);
 items.push({e:e,x:Math.random(),y0:Math.random()*(vh0+300),d:d,s:(M?.75:.6)+d*.75,ry:Math.random()*360,rx:Math.random()*60-30,rz:Math.random()*60-30,sp:.25+d*.95,dr:6+Math.random()*10,on:0})}
@@ -1186,14 +1184,14 @@ addEventListener('scroll',function(){sy=scrollY;dirty=1},{passive:true});addEven
 (function tick(t){var vh=innerHeight,W=innerWidth,Hh=vh+300;if(dirty||t-lt>400){refresh();lt=t}
 vel+=((sy-ps)-vel)*.2;ps=sy;var tv=Math.max(-45,Math.min(45,vel*.9));
 items.forEach(function(o){
-var y=(((o.y0-sy*o.sp+t*o.dr*.004*o.s)%Hh)+Hh)%Hh-150,x=o.x*(W+60)-30;
+var y=(((o.y0-sy*o.sp+(RM?0:t)*o.dr*.004*o.s)%Hh)+Hh)%Hh-150,x=o.x*(W+60)-30;
 var rY=o.ry+sy*.16*(o.d+.4),rX=o.rx+sy*.06+tv,rZ=o.rz+sy*.03;
 o.e.style.transform='translate3d('+x.toFixed(1)+'px,'+y.toFixed(1)+'px,0) perspective(800px) rotateX('+rX.toFixed(1)+'deg) rotateY('+rY.toFixed(1)+'deg) rotateZ('+rZ.toFixed(1)+'deg) scale('+o.s.toFixed(2)+')';
 var hw=70*o.s,hit=0,cx=x+64,cy=y+30;
 for(var k=0;k<blk.length;k++){var q=blk[k];if(cx+hw>q.l&&cx-hw<q.r&&cy+hw*.6>q.t&&cy-hw*.6<q.b){hit=1;break}}
-var op=hit?.08:(.75+o.d*.25);if(op!==o.on){o.on=op;o.e.style.opacity=op}});
+var op=hit?.12:(.85+o.d*.15);if(op!==o.on){o.on=op;o.e.style.opacity=op}});
 var cx2=W/2+Math.cos(sy/900)*(W*.36)-cs/2,cy2=vh*.52+Math.sin(sy/520)*vh*.2-cs/2;
-coin.style.transform='translate3d('+cx2.toFixed(1)+'px,'+cy2.toFixed(1)+'px,0) perspective(900px) rotateX('+(18+tv*.6).toFixed(1)+'deg) rotateY('+(sy*.35+t*.02).toFixed(1)+'deg)';
+coin.style.transform='translate3d('+cx2.toFixed(1)+'px,'+cy2.toFixed(1)+'px,0) perspective(900px) rotateX('+(18+tv*.6).toFixed(1)+'deg) rotateY('+(sy*.35+(RM?0:t)*.02).toFixed(1)+'deg)';
 requestAnimationFrame(tick)})(0);
 })();
 </script>
